@@ -6,7 +6,6 @@ import {
   Button,
   Card,
   CardContent,
-  InputAdornment,
   Stack,
   TextField,
   Typography,
