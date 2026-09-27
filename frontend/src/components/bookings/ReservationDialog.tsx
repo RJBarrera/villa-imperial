@@ -16,72 +16,44 @@ import {
 } from "@mui/material";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-
 import dayjs from "dayjs";
-
 import { getClients } from "../../api/clients";
-
 import { checkAvailability, createBooking } from "../../api/bookings";
-
 import { getPackages } from "../../api/packages";
-
 import type { PaymentMethod } from "../../types/booking";
 
 interface ReservationDialogProps {
   open: boolean;
-
   onClose: () => void;
-
   onCreated: () => void;
-
   initialDate?: string;
 }
 
 interface FormState {
   client_id: string;
-
   package_id: string;
-
   event_date: string;
-
   start_time: string;
-
   event_type: string;
-
   guest_count: string;
-
   discount: string;
-
   initial_payment_amount: string;
-
   initial_payment_method: PaymentMethod | "";
-
   payment_reference: string;
-
   notes: string;
 }
 
 const createInitialForm = (initialDate?: string): FormState => ({
   client_id: "",
-
   package_id: "",
-
   event_date: initialDate ?? dayjs().format("YYYY-MM-DD"),
-
   start_time: "16:00",
-
   event_type: "",
-
   guest_count: "",
-
   discount: "0",
-
   initial_payment_amount: "0",
-
   initial_payment_method: "",
-
   payment_reference: "",
-
   notes: "",
 });
 
@@ -103,27 +75,23 @@ export default function ReservationDialog({
 
   const [availabilityMessage, setAvailabilityMessage] = useState<{
     type: "success" | "error";
-
     text: string;
   } | null>(null);
 
   useEffect(() => {
     if (open) {
       setForm(createInitialForm(initialDate));
-
       setAvailabilityMessage(null);
     }
   }, [open, initialDate]);
 
   const { data: clients = [] } = useQuery({
     queryKey: ["clients", "booking-selector"],
-
     queryFn: () => getClients(),
   });
 
   const { data: packages = [] } = useQuery({
     queryKey: ["packages"],
-
     queryFn: getPackages,
   });
 
@@ -133,7 +101,6 @@ export default function ReservationDialog({
   );
 
   const discount = Number(form.discount || 0);
-
   const finalPrice = Math.max(
     Number(selectedPackage?.base_price ?? 0) - discount,
     0,
@@ -144,7 +111,6 @@ export default function ReservationDialog({
 
     onSuccess: () => {
       onCreated();
-
       onClose();
     },
   });
@@ -212,25 +178,15 @@ export default function ReservationDialog({
 
     mutation.mutate({
       client_id: form.client_id,
-
       package_id: form.package_id,
-
       event_date: form.event_date,
-
       start_time: form.start_time,
-
       event_type: form.event_type.trim(),
-
       guest_count: form.guest_count ? Number(form.guest_count) : null,
-
       discount: Number(form.discount || 0),
-
       initial_payment_amount: Number(form.initial_payment_amount || 0),
-
       initial_payment_method: form.initial_payment_method || null,
-
       payment_reference: form.payment_reference.trim() || null,
-
       notes: form.notes.trim() || null,
     });
   };
@@ -300,12 +256,10 @@ export default function ReservationDialog({
           <Box
             sx={{
               display: "grid",
-
               gridTemplateColumns: {
                 xs: "1fr",
                 md: "1fr 1fr",
               },
-
               gap: 2,
             }}
           >
@@ -347,9 +301,7 @@ export default function ReservationDialog({
               fullWidth
             />
           </Box>
-
           <Divider />
-
           <Typography
             sx={{
               fontSize: 12,
@@ -365,7 +317,6 @@ export default function ReservationDialog({
           <Box
             sx={{
               display: "grid",
-
               gridTemplateColumns: {
                 xs: "1fr",
                 sm: "1fr 1fr",
@@ -432,11 +383,8 @@ export default function ReservationDialog({
             <Box
               sx={{
                 p: 2,
-
                 borderRadius: "14px",
-
                 bgcolor: "#F7F9FB",
-
                 border: "1px solid #EAECF0",
               }}
             >
@@ -546,11 +494,8 @@ export default function ReservationDialog({
               disabled={Number(form.initial_payment_amount || 0) <= 0}
             >
               <MenuItem value="efectivo">Efectivo</MenuItem>
-
               <MenuItem value="transferencia">Transferencia</MenuItem>
-
               <MenuItem value="tarjeta">Tarjeta</MenuItem>
-
               <MenuItem value="otro">Otro</MenuItem>
             </TextField>
 
@@ -574,11 +519,8 @@ export default function ReservationDialog({
               <Box
                 sx={{
                   minWidth: 240,
-
                   p: 2,
-
                   borderRadius: "14px",
-
                   bgcolor: "#F7F9FB",
                 }}
               >

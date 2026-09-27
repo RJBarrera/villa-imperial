@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
-
 import { useQueryClient } from "@tanstack/react-query";
 
 import {
@@ -13,13 +12,9 @@ import type { AuthUser, LoginPayload } from "../types/auth";
 
 interface AuthContextValue {
   user: AuthUser | null;
-
   loading: boolean;
-
   login: (payload: LoginPayload) => Promise<void>;
-
   logout: () => Promise<void>;
-
   refreshUser: () => Promise<void>;
 }
 
@@ -27,11 +22,8 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
-
   const [user, setUser] = useState<AuthUser | null>(null);
-
   const [loading, setLoading] = useState(true);
-
   const refreshUser = async () => {
     try {
       const result = await getMe();
@@ -46,7 +38,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (payload: LoginPayload) => {
     const result = await loginRequest(payload);
-
     setUser(result);
   };
 
@@ -55,7 +46,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await logoutRequest();
     } finally {
       setUser(null);
-
       queryClient.clear();
     }
   };
@@ -67,7 +57,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handleUnauthorized = () => {
       setUser(null);
-
       queryClient.clear();
     };
 

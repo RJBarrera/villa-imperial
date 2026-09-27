@@ -1,11 +1,7 @@
 import { useState } from "react";
-
 import { Box, Toolbar } from "@mui/material";
-
 import { Outlet } from "react-router-dom";
-
 import Sidebar, { DRAWER_WIDTH } from "../components/layout/Sidebar";
-
 import Topbar from "../components/layout/Topbar";
 
 export default function AdminLayout() {
@@ -20,19 +16,16 @@ export default function AdminLayout() {
       }}
     >
       <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
-
       <Topbar onMenuClick={() => setMobileOpen(true)} />
 
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-
           width: {
             xs: "100%",
             md: `calc(100% - ${DRAWER_WIDTH}px)`,
           },
-
           minWidth: 0,
         }}
       >

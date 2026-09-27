@@ -1,29 +1,17 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import AdminLayout from "../layouts/AdminLayout";
-
-import PublicHomePage from "../pages/PublicHomePage";
-
-import LoginPage from "../pages/LoginPage";
-
-import DashboardPage from "../pages/DashboardPage";
-
-import CalendarPage from "../pages/CalendarPage";
-
-import BookingsPage from "../pages/BookingsPage";
-
-import ClientsPage from "../pages/ClientsPage";
-
-import PaymentsPage from "../pages/PaymentsPage";
-
-import PackagesPage from "../pages/PackagesPage";
-
-import ExpensesPage from "../pages/ExpensesPage";
-
-import ReportsPage from "../pages/ReportsPage";
-
-import SettingsPage from "../pages/SettingsPage";
-
+import PublicHomePage from "../pages/PublicHomePage/PublicHomePage";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import DashboardPage from "../pages/DashboardPage/DashboardPage";
+import CalendarPage from "../pages/CalendarPage/CalendarPage";
+import BookingsPage from "../pages/BookingsPage/BookingsPage";
+import ClientsPage from "../pages/ClientsPage/ClientsPage";
+import PaymentsPage from "../pages/PaymentsPage/PaymentsPage";
+import PackagesPage from "../pages/PackagesPage/PackagesPage";
+import ExpensesPage from "../pages/ExpensesPage/ExpensesPage";
+import ReportsPage from "../pages/ReportsPage/ReportsPage";
+import SettingsPage from "../pages/SettingsPage/SettingsPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppRoutes() {

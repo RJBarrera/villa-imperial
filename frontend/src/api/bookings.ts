@@ -26,7 +26,6 @@ export async function getBookings(
 
 export async function getBooking(bookingId: string): Promise<Booking> {
   const response = await http.get<Booking>(`/bookings/${bookingId}`);
-
   return response.data;
 }
 
@@ -34,7 +33,6 @@ export async function createBooking(
   payload: CreateBookingPayload,
 ): Promise<Booking> {
   const response = await http.post<Booking>("/bookings", payload);
-
   return response.data;
 }
 
@@ -43,7 +41,6 @@ export async function updateBooking(
   payload: UpdateBookingPayload,
 ): Promise<Booking> {
   const response = await http.put<Booking>(`/bookings/${bookingId}`, payload);
-
   return response.data;
 }
 
@@ -91,9 +88,7 @@ export async function checkAvailability(
     {
       params: {
         package_id: packageId,
-
         event_date: eventDate,
-
         start_time: startTime,
       },
     },

@@ -1,0 +1,347 @@
+.bookings-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.bookings-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.bookings-header__content {
+  min-width: 0;
+}
+
+.bookings-header__title.MuiTypography-root {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.bookings-header__subtitle.MuiTypography-root {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #667085;
+}
+
+.bookings-header__button.MuiButton-root {
+  min-height: 42px;
+  margin-left: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  flex-shrink: 0;
+}
+
+.bookings-state-card.MuiCard-root {
+  width: 100%;
+}
+
+.bookings-state.MuiCardContent-root {
+  text-align: center;
+}
+
+.bookings-state--loading.MuiCardContent-root {
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.bookings-state--error.MuiCardContent-root {
+  text-align: left;
+}
+
+.bookings-state--empty.MuiCardContent-root {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.bookings-state__icon.MuiSvgIcon-root {
+  font-size: 54px;
+  color: #98a2b3;
+}
+
+.bookings-state__title.MuiTypography-root {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.bookings-state__error-title.MuiTypography-root {
+  font-weight: 600;
+  color: #d92d20;
+}
+
+.bookings-state__description.MuiTypography-root {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #667085;
+}
+
+.bookings-state__button.MuiButton-root {
+  margin-top: 20px;
+}
+
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-card.MuiCard-root {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.booking-card.MuiCard-root:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(16, 24, 40, 0.07);
+}
+
+.booking-card__content.MuiCardContent-root {
+  padding: 18px;
+}
+
+.booking-card__content.MuiCardContent-root:last-child {
+  padding-bottom: 18px;
+}
+
+.booking-card__layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.booking-card__event {
+  display: flex;
+  gap: 16px;
+  min-width: 0;
+  flex: 1;
+}
+
+.booking-card__date {
+  width: 66px;
+  min-width: 66px;
+  height: 66px;
+  border-radius: 15px;
+  background: #f3f6f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking-card__date-day.MuiTypography-root {
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.booking-card__date-month.MuiTypography-root {
+  margin-top: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #667085;
+}
+
+.booking-card__details {
+  min-width: 0;
+  flex: 1;
+}
+
+.booking-card__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.booking-card__event-title.MuiTypography-root {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.bookings-status.MuiChip-root {
+  height: 23px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.bookings-status--pending.MuiChip-root {
+  background: #fff5e7;
+  color: #a76714;
+}
+
+.bookings-status--reserved.MuiChip-root {
+  background: #fff0d9;
+  color: #a76714;
+}
+
+.bookings-status--confirmed.MuiChip-root {
+  background: #e8f1ff;
+  color: #2867c8;
+}
+
+.bookings-status--paid.MuiChip-root {
+  background: #e9f8f1;
+  color: #14724f;
+}
+
+.bookings-status--cancelled.MuiChip-root {
+  background: #fdecec;
+  color: #b42318;
+}
+
+.bookings-status--completed.MuiChip-root,
+.bookings-status--blocked.MuiChip-root {
+  background: #f2f4f7;
+  color: #475467;
+}
+
+.booking-card__client.MuiTypography-root {
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.booking-card__metadata {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.booking-card__metadata-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #667085;
+}
+
+.booking-card__metadata-item .MuiSvgIcon-root {
+  font-size: 15px;
+}
+
+.booking-card__metadata-item .MuiTypography-root {
+  font-size: 11px;
+  color: inherit;
+}
+
+.booking-card__reference.MuiTypography-root {
+  margin-top: 5px;
+  font-size: 11px;
+  color: #98a2b3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.booking-card__finance {
+  width: 220px;
+  min-width: 220px;
+}
+
+.booking-card__finance-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.booking-card__finance-row + .booking-card__finance-row {
+  margin-top: 5px;
+}
+
+.booking-card__finance-label.MuiTypography-root {
+  font-size: 11px;
+  color: #667085;
+}
+
+.booking-card__finance-value.MuiTypography-root {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.booking-card__finance-value--strong.MuiTypography-root {
+  font-size: 13px;
+  font-weight: 700;
+  color: #101828;
+}
+
+.booking-card__finance-value--paid.MuiTypography-root {
+  color: #039855;
+}
+
+.booking-card__finance-value--pending.MuiTypography-root {
+  font-size: 13px;
+  font-weight: 700;
+  color: #dc6803;
+}
+
+.booking-card__divider.MuiDivider-root {
+  margin: 8px 0;
+}
+
+.booking-card__detail-button.MuiButton-root {
+  min-height: 36px;
+  margin-top: 14px;
+}
+
+@media (max-width: 899px) {
+  .booking-card__layout {
+    flex-direction: column;
+  }
+
+  .booking-card__finance {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 12px;
+    background: #f8fafc;
+  }
+}
+
+@media (max-width: 599px) {
+  .bookings-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bookings-header__title.MuiTypography-root {
+    font-size: 24px;
+  }
+
+  .bookings-header__button.MuiButton-root {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .bookings-state--empty.MuiCardContent-root {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .booking-card__content.MuiCardContent-root {
+    padding: 14px;
+  }
+
+  .booking-card__content.MuiCardContent-root:last-child {
+    padding-bottom: 14px;
+  }
+
+  .booking-card__event {
+    gap: 11px;
+  }
+
+  .booking-card__metadata {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .booking-card__reference.MuiTypography-root {
+    white-space: normal;
+  }
+}

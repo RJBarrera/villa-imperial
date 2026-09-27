@@ -85,11 +85,8 @@ const menuItems = [
 export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
-
   const theme = useTheme();
-
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-
   const handleNavigation = (path: string) => {
     navigate(path);
 
@@ -115,7 +112,6 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           display: "flex",
           alignItems: "center",
           gap: 1.4,
-
           px: 2.2,
           py: 2.2,
 
@@ -129,15 +125,10 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           sx={{
             width: 48,
             height: 48,
-
             objectFit: "cover",
-
             borderRadius: "50%",
-
             flexShrink: 0,
-
             border: "1px solid rgba(255,255,255,.18)",
-
             boxShadow: "0 4px 14px rgba(0,0,0,.18)",
           }}
         />
@@ -161,9 +152,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           <Typography
             sx={{
               mt: 0.3,
-
               fontSize: 10,
-
               color: "rgba(255,255,255,.62)",
             }}
           >
@@ -221,19 +210,15 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
                   px: 2,
                   minHeight: 48,
                   color: active ? "#FFFFFF" : "rgba(255,255,255,.72)",
-
                   "& .MuiListItemIcon-root": {
                     color: active ? "#D7B66F" : "rgba(255,255,255,.65)",
                   },
-
                   "&.Mui-selected": {
                     backgroundColor: "rgba(255,255,255,.10)",
                   },
-
                   "&.Mui-selected:hover": {
                     backgroundColor: "rgba(255,255,255,.13)",
                   },
-
                   "&:hover": {
                     backgroundColor: "rgba(255,255,255,.07)",
                   },
@@ -278,11 +263,9 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           sx={{
             borderRadius: "12px",
             color: "rgba(255,255,255,.72)",
-
             "& .MuiListItemIcon-root": {
               color: "rgba(255,255,255,.65)",
             },
-
             "&.Mui-selected": {
               color: "#FFFFFF",
               backgroundColor: "rgba(255,255,255,.10)",
@@ -323,10 +306,8 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
             xs: "none",
             md: "block",
           },
-
           width: DRAWER_WIDTH,
           flexShrink: 0,
-
           "& .MuiDrawer-paper": {
             width: DRAWER_WIDTH,
             boxSizing: "border-box",
@@ -351,7 +332,6 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
             xs: "block",
             md: "none",
           },
-
           "& .MuiDrawer-paper": {
             width: DRAWER_WIDTH,
             boxSizing: "border-box",

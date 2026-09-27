@@ -1,0 +1,224 @@
+.clients-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.clients-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.clients-header__content {
+  min-width: 0;
+}
+
+.clients-header__title.MuiTypography-root {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.clients-header__subtitle.MuiTypography-root {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #667085;
+}
+
+.clients-header__button.MuiButton-root {
+  flex-shrink: 0;
+}
+
+.clients-card {
+  padding: 20px;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 2px 4px rgba(16, 24, 40, 0.02),
+    0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.clients-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.clients-toolbar__search.MuiTextField-root {
+  width: 360px;
+}
+
+.clients-toolbar__count.MuiTypography-root {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #667085;
+}
+
+.clients-state {
+  width: 100%;
+}
+
+.clients-state--loading {
+  display: flex;
+  justify-content: center;
+  padding: 64px 0;
+}
+
+.clients-state--error {
+  padding: 16px 0;
+}
+
+.clients-state--empty {
+  padding: 64px 0;
+  text-align: center;
+}
+
+.clients-state__error.MuiTypography-root {
+  color: #d92d20;
+}
+
+.clients-state__icon.MuiSvgIcon-root {
+  font-size: 52px;
+  color: #98a2b3;
+}
+
+.clients-state__title.MuiTypography-root {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.clients-state__description.MuiTypography-root {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #667085;
+}
+
+.clients-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.client-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #eaecf0;
+  border-radius: 13px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.client-item:hover {
+  background: #fafbfc;
+  border-color: #dfe3e8;
+}
+
+.client-item__avatar.MuiAvatar-root {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: #edf3f7;
+  color: #173b57;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.client-item__content {
+  min-width: 0;
+  flex: 1;
+}
+
+.client-item__name.MuiTypography-root {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.client-item__contact {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 3px;
+}
+
+.client-item__contact-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 4px;
+  color: #667085;
+}
+
+.client-item__contact-item .MuiSvgIcon-root {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.client-item__contact-item .MuiTypography-root {
+  overflow: hidden;
+  font-size: 11px;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.client-item__menu.MuiIconButton-root {
+  flex-shrink: 0;
+}
+
+@media (max-width: 599px) {
+  .clients-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .clients-header__title.MuiTypography-root {
+    font-size: 24px;
+  }
+
+  .clients-header__button.MuiButton-root {
+    width: 100%;
+  }
+
+  .clients-card {
+    padding: 14px;
+  }
+
+  .clients-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .clients-toolbar__search.MuiTextField-root {
+    width: 100%;
+  }
+
+  .clients-toolbar__count.MuiTypography-root {
+    align-self: flex-end;
+  }
+
+  .clients-state--empty {
+    padding: 48px 0;
+  }
+
+  .client-item {
+    align-items: flex-start;
+  }
+
+  .client-item__contact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+
+  .client-item__contact-item {
+    max-width: 100%;
+  }
+}

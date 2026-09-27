@@ -12,20 +12,14 @@ import {
 } from "@mui/material";
 
 import { useMutation } from "@tanstack/react-query";
-
 import { useEffect, useState } from "react";
-
 import { addBookingPayment } from "../../api/bookings";
-
 import type { Booking, PaymentMethod } from "../../types/booking";
 
 interface PaymentDialogProps {
   open: boolean;
-
   booking: Booking;
-
   onClose: () => void;
-
   onSuccess: (booking: Booking) => void;
 }
 
@@ -44,11 +38,8 @@ export default function PaymentDialog({
   onSuccess,
 }: PaymentDialogProps) {
   const [amount, setAmount] = useState("");
-
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | "">("");
-
   const [reference, setReference] = useState("");
-
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
@@ -64,11 +55,8 @@ export default function PaymentDialog({
     mutationFn: () =>
       addBookingPayment(booking.id, {
         amount: Number(amount),
-
         payment_method: paymentMethod as PaymentMethod,
-
         reference: reference.trim() || null,
-
         notes: notes.trim() || null,
       }),
 
@@ -134,11 +122,8 @@ export default function PaymentDialog({
             required
           >
             <MenuItem value="efectivo">Efectivo</MenuItem>
-
             <MenuItem value="transferencia">Transferencia</MenuItem>
-
             <MenuItem value="tarjeta">Tarjeta</MenuItem>
-
             <MenuItem value="otro">Otro</MenuItem>
           </TextField>
 

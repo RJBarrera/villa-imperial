@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 
 interface StatCardProps {
@@ -24,7 +23,6 @@ export default function StatCard({
       sx={{
         height: "100%",
         transition: "transform .2s ease, box-shadow .2s ease",
-
         "&:hover": {
           transform: "translateY(-2px)",
           boxShadow: "0 10px 30px rgba(16,24,40,.08)",
@@ -92,17 +90,12 @@ export default function StatCard({
               width: 48,
               height: 48,
               borderRadius: "14px",
-
               backgroundColor: iconBackground,
-
               color: iconColor,
-
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-
               flexShrink: 0,
-
               "& svg": {
                 fontSize: 24,
               },

@@ -11,16 +11,12 @@ import {
 } from "@mui/material";
 
 import { useMutation } from "@tanstack/react-query";
-
 import { createClient } from "../../api/clients";
-
 import type { CreateClientPayload } from "../../types/client";
 
 interface ClientDialogProps {
   open: boolean;
-
   onClose: () => void;
-
   onCreated: () => void;
 }
 
@@ -43,9 +39,7 @@ export default function ClientDialog({
 
     onSuccess: () => {
       setForm(INITIAL_FORM);
-
       onCreated();
-
       onClose();
     },
   });
@@ -64,11 +58,8 @@ export default function ClientDialog({
 
     mutation.mutate({
       full_name: form.full_name.trim(),
-
       phone: form.phone.trim(),
-
       email: form.email?.trim() || null,
-
       notes: form.notes?.trim() || null,
     });
   };

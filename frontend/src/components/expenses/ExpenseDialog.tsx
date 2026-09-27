@@ -11,46 +11,31 @@ import {
 } from "@mui/material";
 
 import { useMutation } from "@tanstack/react-query";
-
 import { useEffect, useState } from "react";
-
 import dayjs from "dayjs";
-
 import { createExpense } from "../../api/expenses";
 
 interface ExpenseDialogProps {
   open: boolean;
-
   onClose: () => void;
-
   onCreated: () => void;
 }
 
 interface FormState {
   concept: string;
-
   category: string;
-
   amount: string;
-
   spent_on: string;
-
   payment_method: string;
-
   notes: string;
 }
 
 const INITIAL_FORM: FormState = {
   concept: "",
-
   category: "",
-
   amount: "",
-
   spent_on: dayjs().format("YYYY-MM-DD"),
-
   payment_method: "",
-
   notes: "",
 };
 
@@ -76,14 +61,12 @@ export default function ExpenseDialog({
 
     onSuccess: () => {
       onCreated();
-
       onClose();
     },
   });
 
   const handleChange = (
     field: keyof FormState,
-
     value: string,
   ) => {
     setForm((current) => ({
@@ -105,15 +88,10 @@ export default function ExpenseDialog({
 
     mutation.mutate({
       concept: form.concept.trim(),
-
       category: form.category || null,
-
       amount: Number(form.amount),
-
       spent_on: form.spent_on,
-
       payment_method: form.payment_method || null,
-
       notes: form.notes.trim() || null,
     });
   };
@@ -162,19 +140,12 @@ export default function ExpenseDialog({
             fullWidth
           >
             <MenuItem value="">Sin categoría</MenuItem>
-
             <MenuItem value="Limpieza">Limpieza</MenuItem>
-
             <MenuItem value="Mantenimiento">Mantenimiento</MenuItem>
-
             <MenuItem value="Alberca">Alberca</MenuItem>
-
             <MenuItem value="Electricidad">Electricidad</MenuItem>
-
             <MenuItem value="Insumos">Insumos</MenuItem>
-
             <MenuItem value="Reparación">Reparación</MenuItem>
-
             <MenuItem value="Otro">Otro</MenuItem>
           </TextField>
 
@@ -211,13 +182,9 @@ export default function ExpenseDialog({
             fullWidth
           >
             <MenuItem value="">No especificada</MenuItem>
-
             <MenuItem value="Efectivo">Efectivo</MenuItem>
-
             <MenuItem value="Transferencia">Transferencia</MenuItem>
-
             <MenuItem value="Tarjeta">Tarjeta</MenuItem>
-
             <MenuItem value="Otro">Otro</MenuItem>
           </TextField>
 

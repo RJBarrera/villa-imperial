@@ -7,7 +7,6 @@ import type {
 
 export async function getBusinessSettings(): Promise<BusinessSettings> {
   const response = await http.get<BusinessSettings>("/settings/business");
-
   return response.data;
 }
 

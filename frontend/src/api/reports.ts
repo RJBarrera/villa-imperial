@@ -1,5 +1,4 @@
 import { http } from "./http";
-
 import type { ReportSummary } from "../types/report";
 
 export async function getReportSummary(year: number): Promise<ReportSummary> {

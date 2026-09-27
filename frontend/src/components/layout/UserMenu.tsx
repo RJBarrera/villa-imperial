@@ -13,16 +13,12 @@ import {
 } from "@mui/material";
 
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import { useAuth } from "../../context/AuthContext";
 
 export default function UserMenu() {
   const navigate = useNavigate();
-
   const { user, logout } = useAuth();
-
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   if (!user) {
@@ -39,9 +35,7 @@ export default function UserMenu() {
 
   const handleLogout = async () => {
     setAnchorEl(null);
-
     await logout();
-
     navigate("/admin/login", {
       replace: true,
     });
@@ -54,7 +48,6 @@ export default function UserMenu() {
           sx={{
             display: {
               xs: "none",
-
               sm: "block",
             },
 
@@ -66,13 +59,9 @@ export default function UserMenu() {
               fontSize: 11.5,
               fontWeight: 600,
               lineHeight: 1.2,
-
               whiteSpace: "nowrap",
-
               maxWidth: 180,
-
               overflow: "hidden",
-
               textOverflow: "ellipsis",
             }}
           >
@@ -97,13 +86,9 @@ export default function UserMenu() {
           <Avatar
             sx={{
               width: 36,
-
               height: 36,
-
               bgcolor: "primary.main",
-
               fontSize: 11,
-
               fontWeight: 700,
             }}
           >
@@ -120,7 +105,6 @@ export default function UserMenu() {
         <MenuItem
           onClick={() => {
             setAnchorEl(null);
-
             navigate("/admin/configuracion");
           }}
         >

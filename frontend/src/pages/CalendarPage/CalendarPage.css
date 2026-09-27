@@ -1,0 +1,190 @@
+.calendar-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.calendar-header__title.MuiTypography-root {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.calendar-header__subtitle.MuiTypography-root {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #667085;
+}
+
+.calendar-header__button.MuiButton-root {
+  flex-shrink: 0;
+}
+
+.calendar-card {
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 2px 4px rgba(16, 24, 40, 0.02),
+    0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.calendar-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calendar-toolbar__month.MuiTypography-root {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.calendar-grid-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.calendar-grid {
+  min-width: 760px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-grid__weekday {
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #667085;
+}
+
+.calendar-day {
+  min-height: 126px;
+  padding: 8px;
+  border-top: 1px solid #eaecf0;
+  border-right: 1px solid #eaecf0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.calendar-day:hover {
+  background: #f6f8fa;
+}
+
+.calendar-day--current-month {
+  background: #fff;
+}
+
+.calendar-day--outside-month {
+  background: #fafbfc;
+}
+
+.calendar-day__number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: #101828;
+}
+
+.calendar-day--outside-month .calendar-day__number {
+  color: #98a2b3;
+}
+
+.calendar-day__number--today {
+  background: #173b57;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.calendar-day__bookings {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.calendar-booking {
+  padding: 5px 6px;
+  overflow: hidden;
+  border-radius: 7px;
+  font-size: 9.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.calendar-booking--pending {
+  background: #fff5e7;
+  color: #a76714;
+}
+
+.calendar-booking--reserved {
+  background: #fff0d9;
+  color: #a76714;
+}
+
+.calendar-booking--confirmed {
+  background: #e8f1ff;
+  color: #2867c8;
+}
+
+.calendar-booking--paid {
+  background: #e9f8f1;
+  color: #14724f;
+}
+
+.calendar-booking--cancelled {
+  background: #fdecec;
+  color: #b42318;
+}
+
+.calendar-booking--completed,
+.calendar-booking--blocked {
+  background: #f2f4f7;
+  color: #475467;
+}
+
+.calendar-day__more.MuiChip-root {
+  height: 19px;
+  font-size: 9px;
+}
+
+@media (max-width: 599px) {
+  .calendar-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calendar-header__title.MuiTypography-root {
+    font-size: 24px;
+  }
+
+  .calendar-header__button.MuiButton-root {
+    width: 100%;
+  }
+
+  .calendar-card {
+    padding: 10px;
+  }
+
+  .calendar-toolbar__month.MuiTypography-root {
+    font-size: 16px;
+  }
+}

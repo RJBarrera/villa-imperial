@@ -1,10 +1,8 @@
 import { http } from "./http";
-
 import type { PaymentMovement } from "../types/payment";
 
 interface PaymentFilters {
   date_from?: string;
-
   date_to?: string;
 }
 

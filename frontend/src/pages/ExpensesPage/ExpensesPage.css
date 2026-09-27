@@ -1,0 +1,261 @@
+.expenses-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.expenses-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.expenses-header__content {
+  min-width: 0;
+}
+
+.expenses-header__title.MuiTypography-root {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.expenses-header__subtitle.MuiTypography-root {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #667085;
+}
+
+.expenses-header__actions {
+  display: flex;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.expenses-header__month.MuiTextField-root {
+  min-width: 170px;
+}
+
+.expenses-header__button.MuiButton-root {
+  flex-shrink: 0;
+}
+
+.expenses-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.expenses-summary__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 2px 4px rgba(16, 24, 40, 0.02),
+    0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.expenses-summary__label.MuiTypography-root {
+  font-size: 12px;
+  color: #667085;
+}
+
+.expenses-summary__value.MuiTypography-root {
+  margin-top: 6px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.expenses-summary__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expenses-summary__icon .MuiSvgIcon-root {
+  font-size: 36px;
+}
+
+.expenses-summary__icon--expense {
+  color: #d92d20;
+}
+
+.expenses-summary__icon--movements {
+  color: #173b57;
+}
+
+.expenses-card {
+  padding: 20px;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 2px 4px rgba(16, 24, 40, 0.02),
+    0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.expenses-card__title {
+  margin: 0 0 16px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: #101828;
+}
+
+.expenses-state {
+  width: 100%;
+}
+
+.expenses-state--loading {
+  display: flex;
+  justify-content: center;
+  padding: 64px 0;
+}
+
+.expenses-state--error {
+  padding: 16px 0;
+}
+
+.expenses-state--empty {
+  padding: 64px 0;
+  text-align: center;
+}
+
+.expenses-state__error.MuiTypography-root {
+  color: #d92d20;
+}
+
+.expenses-state__icon.MuiSvgIcon-root {
+  font-size: 50px;
+  color: #98a2b3;
+}
+
+.expenses-state__title.MuiTypography-root {
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.expenses-state__description.MuiTypography-root {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #667085;
+}
+
+.expenses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.expense-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid #eaecf0;
+  border-radius: 13px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.expense-item:hover {
+  background: #fafbfc;
+  border-color: #dfe3e8;
+}
+
+.expense-item__content {
+  min-width: 0;
+}
+
+.expense-item__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.expense-item__title.MuiTypography-root {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.expense-item__category.MuiChip-root {
+  height: 21px;
+  font-size: 9.5px;
+}
+
+.expense-item__meta.MuiTypography-root {
+  margin-top: 3px;
+  font-size: 10.5px;
+  color: #667085;
+}
+
+.expense-item__notes.MuiTypography-root {
+  margin-top: 3px;
+  font-size: 10.5px;
+  color: #98a2b3;
+}
+
+.expense-item__amount.MuiTypography-root {
+  flex-shrink: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #d92d20;
+}
+
+@media (max-width: 899px) {
+  .expenses-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .expenses-header__actions {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 599px) {
+  .expenses-header__title.MuiTypography-root {
+    font-size: 24px;
+  }
+
+  .expenses-header__actions {
+    flex-direction: column;
+  }
+
+  .expenses-header__month.MuiTextField-root {
+    width: 100%;
+  }
+
+  .expenses-header__button.MuiButton-root {
+    width: 100%;
+  }
+
+  .expenses-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .expenses-card {
+    padding: 14px;
+  }
+
+  .expenses-state--empty {
+    padding: 48px 0;
+  }
+
+  .expense-item {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-item__amount.MuiTypography-root {
+    justify-self: start;
+  }
+}

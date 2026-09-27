@@ -27,9 +27,7 @@ import {
 } from "@mui/material";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
 import { useState } from "react";
-
 import dayjs from "dayjs";
 
 import {
@@ -39,16 +37,12 @@ import {
 } from "../../api/bookings";
 
 import { printBookingReceipt } from "../../utils/bookingReceipt";
-
 import PaymentDialog from "./PaymentDialog";
-
 import type { Booking, BookingStatus } from "../../types/booking";
 
 interface BookingDetailDialogProps {
   open: boolean;
-
   bookingId: string | null;
-
   onClose: () => void;
 }
 
@@ -80,11 +74,8 @@ export default function BookingDetailDialog({
   onClose,
 }: BookingDetailDialogProps) {
   const queryClient = useQueryClient();
-
   const [paymentOpen, setPaymentOpen] = useState(false);
-
   const [cancelOpen, setCancelOpen] = useState(false);
-
   const [cancellationReason, setCancellationReason] = useState("");
   const [editOpen, setEditOpen] = useState(false);
 
@@ -94,9 +85,7 @@ export default function BookingDetailDialog({
     isError,
   } = useQuery({
     queryKey: ["booking", bookingId],
-
     queryFn: () => getBooking(bookingId!),
-
     enabled: open && !!bookingId,
   });
 
@@ -122,9 +111,7 @@ export default function BookingDetailDialog({
 
     onSuccess: async () => {
       setCancelOpen(false);
-
       setCancellationReason("");
-
       await refresh();
     },
   });
@@ -380,13 +367,9 @@ export default function BookingDetailDialog({
                           p: 1.5,
 
                           border: "1px solid #EAECF0",
-
                           borderRadius: "12px",
-
                           display: "flex",
-
                           justifyContent: "space-between",
-
                           gap: 2,
                         }}
                       >
@@ -395,7 +378,6 @@ export default function BookingDetailDialog({
                             sx={{
                               fontSize: 12,
                               fontWeight: 600,
-
                               textTransform: "capitalize",
                             }}
                           >
@@ -606,9 +588,7 @@ export default function BookingDetailDialog({
 
 interface InfoProps {
   icon: React.ReactNode;
-
   label: string;
-
   value: string;
 }
 
@@ -618,7 +598,6 @@ function Info({ icon, label, value }: InfoProps) {
       <Box
         sx={{
           color: "primary.main",
-
           "& svg": {
             fontSize: 20,
           },
@@ -653,9 +632,7 @@ function Info({ icon, label, value }: InfoProps) {
 
 interface FinancialRowProps {
   label: string;
-
   value: string;
-
   strong?: boolean;
 }
 
@@ -666,7 +643,6 @@ function FinancialRow({ label, value, strong = false }: FinancialRowProps) {
         sx={{
           fontSize: 12,
           color: strong ? "text.primary" : "text.secondary",
-
           fontWeight: strong ? 700 : 400,
         }}
       >
@@ -676,7 +652,6 @@ function FinancialRow({ label, value, strong = false }: FinancialRowProps) {
       <Typography
         sx={{
           fontSize: 13,
-
           fontWeight: strong ? 700 : 500,
         }}
       >

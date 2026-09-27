@@ -1,5 +1,4 @@
 import { http } from "./http";
-
 import type { Client, CreateClientPayload } from "../types/client";
 
 export async function getClients(search?: string): Promise<Client[]> {

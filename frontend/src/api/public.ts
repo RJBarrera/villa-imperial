@@ -9,13 +9,11 @@ import type {
 
 export async function getPublicBusiness(): Promise<PublicBusiness> {
   const response = await http.get<PublicBusiness>("/public/business");
-
   return response.data;
 }
 
 export async function getPublicPackages(): Promise<PublicPackage[]> {
   const response = await http.get<PublicPackage[]>("/public/packages");
-
   return response.data;
 }
 
@@ -39,9 +37,7 @@ export async function checkPublicAvailability(
   const response = await http.get<PublicAvailability>("/public/availability", {
     params: {
       package_id: packageId,
-
       event_date: eventDate,
-
       start_time: startTime,
     },
   });

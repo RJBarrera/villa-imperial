@@ -29,18 +29,13 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
           xs: "100%",
           md: `calc(100% - ${DRAWER_WIDTH}px)`,
         },
-
         ml: {
           xs: 0,
           md: `${DRAWER_WIDTH}px`,
         },
-
         backgroundColor: "rgba(255,255,255,.96)",
-
         backdropFilter: "blur(12px)",
-
         borderBottom: "1px solid #EAECF0",
-
         zIndex: (theme) => theme.zIndex.drawer - 1,
       }}
     >
@@ -50,17 +45,13 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
             xs: "68px !important",
             md: "76px !important",
           },
-
           px: {
             xs: 2,
             sm: 2.5,
             md: 3.5,
           },
-
           display: "flex",
-
           alignItems: "center",
-
           width: "100%",
         }}
       >
@@ -96,16 +87,12 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
             <Typography
               sx={{
                 fontWeight: 700,
-
                 fontSize: {
                   xs: 16,
                   sm: 17,
                 },
-
                 lineHeight: 1.2,
-
                 color: "text.primary",
-
                 whiteSpace: "nowrap",
               }}
             >
@@ -118,15 +105,10 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
                   xs: "none",
                   sm: "block",
                 },
-
                 mt: 0.25,
-
                 fontSize: 11,
-
                 lineHeight: 1.2,
-
                 color: "text.secondary",
-
                 whiteSpace: "nowrap",
               }}
             >
@@ -145,9 +127,7 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
           }}
           sx={{
             ml: "auto",
-
             alignItems: "center",
-
             flexShrink: 0,
           }}
         >
@@ -187,14 +167,11 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
             sx={{
               width: "1px",
               height: 32,
-
               backgroundColor: "#EAECF0",
-
               mx: {
                 xs: 0.25,
                 sm: 0.5,
               },
-
               display: {
                 xs: "none",
                 sm: "block",
@@ -203,7 +180,6 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
           />
 
           {/* USUARIO */}
-
           <UserMenu />
         </Stack>
       </Toolbar>

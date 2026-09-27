@@ -13,44 +13,28 @@ import {
 } from "@mui/material";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-
 import { useEffect, useMemo, useState } from "react";
-
 import dayjs from "dayjs";
-
 import { getClients } from "../../api/clients";
-
 import { checkAvailability, updateBooking } from "../../api/bookings";
-
 import { getPackages } from "../../api/packages";
-
 import type { Booking, UpdateBookingPayload } from "../../types/booking";
 
 interface EditBookingDialogProps {
   open: boolean;
-
   booking: Booking;
-
   onClose: () => void;
-
   onUpdated: (booking: Booking) => void;
 }
 
 interface FormState {
   client_id: string;
-
   package_id: string;
-
   event_date: string;
-
   start_time: string;
-
   event_type: string;
-
   guest_count: string;
-
   discount: string;
-
   notes: string;
 }
 
@@ -70,25 +54,17 @@ export default function EditBookingDialog({
 }: EditBookingDialogProps) {
   const [form, setForm] = useState<FormState>({
     client_id: "",
-
     package_id: "",
-
     event_date: "",
-
     start_time: "",
-
     event_type: "",
-
     guest_count: "",
-
     discount: "0",
-
     notes: "",
   });
 
   const [availability, setAvailability] = useState<{
     severity: "success" | "error";
-
     text: string;
   } | null>(null);
 
@@ -99,19 +75,12 @@ export default function EditBookingDialog({
 
     setForm({
       client_id: booking.client.id,
-
       package_id: booking.rental_package.id,
-
       event_date: dayjs(booking.starts_at).format("YYYY-MM-DD"),
-
       start_time: dayjs(booking.starts_at).format("HH:mm"),
-
       event_type: booking.event_type,
-
       guest_count: booking.guest_count?.toString() ?? "",
-
       discount: booking.discount,
-
       notes: booking.notes ?? "",
     });
 
@@ -120,13 +89,11 @@ export default function EditBookingDialog({
 
   const { data: clients = [] } = useQuery({
     queryKey: ["clients", "booking-edit"],
-
     queryFn: () => getClients(),
   });
 
   const { data: packages = [] } = useQuery({
     queryKey: ["packages"],
-
     queryFn: getPackages,
   });
 
@@ -140,7 +107,6 @@ export default function EditBookingDialog({
     : Number(booking.agreed_price);
 
   const discount = Number(form.discount || 0);
-
   const newTotal = Math.max(packagePrice - discount, 0);
 
   const mutation = useMutation({
@@ -154,11 +120,7 @@ export default function EditBookingDialog({
     },
   });
 
-  const handleChange = (
-    field: keyof FormState,
-
-    value: string,
-  ) => {
+  const handleChange = (field: keyof FormState, value: string) => {
     setForm((current) => ({
       ...current,
 
@@ -189,7 +151,6 @@ export default function EditBookingDialog({
       if (result.available) {
         setAvailability({
           severity: "success",
-
           text: "El horario está disponible.",
         });
 
@@ -199,7 +160,6 @@ export default function EditBookingDialog({
       if (result.conflicting_booking?.id === booking.id) {
         setAvailability({
           severity: "success",
-
           text: "El horario corresponde a esta misma reservación.",
         });
 
@@ -208,7 +168,6 @@ export default function EditBookingDialog({
 
       setAvailability({
         severity: "error",
-
         text: result.conflicting_booking
           ? `Existe conflicto con ${result.conflicting_booking.folio}.`
           : "El horario no está disponible.",
@@ -216,14 +175,12 @@ export default function EditBookingDialog({
     } catch {
       setAvailability({
         severity: "error",
-
         text: "No fue posible validar la disponibilidad.",
       });
     }
   };
 
   const errorDetail = (mutation.error as any)?.response?.data?.detail;
-
   const errorMessage =
     typeof errorDetail === "string"
       ? errorDetail
@@ -242,19 +199,12 @@ export default function EditBookingDialog({
 
     mutation.mutate({
       client_id: form.client_id,
-
       package_id: form.package_id,
-
       event_date: form.event_date,
-
       start_time: form.start_time,
-
       event_type: form.event_type.trim(),
-
       guest_count: form.guest_count ? Number(form.guest_count) : null,
-
       discount: Number(form.discount || 0),
-
       notes: form.notes.trim() || null,
     });
   };
@@ -281,13 +231,9 @@ export default function EditBookingDialog({
           <Typography
             sx={{
               fontSize: 12,
-
               fontWeight: 700,
-
               textTransform: "uppercase",
-
               letterSpacing: 0.8,
-
               color: "text.secondary",
             }}
           >
@@ -297,13 +243,10 @@ export default function EditBookingDialog({
           <Box
             sx={{
               display: "grid",
-
               gridTemplateColumns: {
                 xs: "1fr",
-
                 md: "1fr 1fr",
               },
-
               gap: 2,
             }}
           >
@@ -319,9 +262,7 @@ export default function EditBookingDialog({
               {clients.map((client) => (
                 <MenuItem key={client.id} value={client.id}>
                   {client.full_name}
-
                   {" — "}
-
                   {client.phone}
                 </MenuItem>
               ))}
@@ -349,15 +290,10 @@ export default function EditBookingDialog({
           <Typography
             sx={{
               mt: 1,
-
               fontSize: 12,
-
               fontWeight: 700,
-
               textTransform: "uppercase",
-
               letterSpacing: 0.8,
-
               color: "text.secondary",
             }}
           >
@@ -367,13 +303,10 @@ export default function EditBookingDialog({
           <Box
             sx={{
               display: "grid",
-
               gridTemplateColumns: {
                 xs: "1fr",
-
                 md: "1fr 1fr",
               },
-
               gap: 2,
             }}
           >
@@ -423,9 +356,7 @@ export default function EditBookingDialog({
               {packages.map((rentalPackage) => (
                 <MenuItem key={rentalPackage.id} value={rentalPackage.id}>
                   {rentalPackage.name}
-
                   {" — "}
-
                   {currency(rentalPackage.base_price)}
                 </MenuItem>
               ))}
@@ -449,15 +380,10 @@ export default function EditBookingDialog({
           <Typography
             sx={{
               mt: 1,
-
               fontSize: 12,
-
               fontWeight: 700,
-
               textTransform: "uppercase",
-
               letterSpacing: 0.8,
-
               color: "text.secondary",
             }}
           >
@@ -467,13 +393,10 @@ export default function EditBookingDialog({
           <Box
             sx={{
               display: "grid",
-
               gridTemplateColumns: {
                 xs: "1fr",
-
                 md: "1fr 1fr",
               },
-
               gap: 2,
             }}
           >
