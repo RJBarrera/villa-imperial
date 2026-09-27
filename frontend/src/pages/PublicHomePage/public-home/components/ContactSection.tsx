@@ -1,6 +1,6 @@
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
 import WhatsApp from "@mui/icons-material/WhatsApp";
-import type { PublicBusiness } from "../../../types/public";
+import type { PublicBusiness } from "../../../../types/public";
 import { PHOTOS } from "../publicHome.data";
 
 interface ContactSectionProps {

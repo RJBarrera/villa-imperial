@@ -3,7 +3,7 @@ import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
 import WhatsApp from "@mui/icons-material/WhatsApp";
 import { Alert, MenuItem, TextField } from "@mui/material";
 import dayjs from "dayjs";
-import type { PublicAvailability, PublicPackage } from "../../../types/public";
+import type { PublicAvailability, PublicPackage } from "../../../../types/public";
 import { currency } from "../publicHome.utils";
 
 interface AvailabilityFormProps {

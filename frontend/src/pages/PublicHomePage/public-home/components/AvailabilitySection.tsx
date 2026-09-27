@@ -1,5 +1,5 @@
 import type { Dayjs } from "dayjs";
-import type { PublicAvailability, PublicPackage } from "../../../types/public";
+import type { PublicAvailability, PublicPackage } from "../../../../types/public";
 import AvailabilityCalendar from "./AvailabilityCalendar";
 import AvailabilityForm from "./AvailabilityForm";
 import SectionHeader from "./SectionHeader";

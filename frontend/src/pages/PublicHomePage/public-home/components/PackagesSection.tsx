@@ -1,5 +1,5 @@
 import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
-import type { PublicPackage } from "../../../types/public";
+import type { PublicPackage } from "../../../../types/public";
 import { currency } from "../publicHome.utils";
 import SectionHeader from "./SectionHeader";
 
