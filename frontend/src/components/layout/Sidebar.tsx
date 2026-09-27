@@ -120,7 +120,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
       >
         <Box
           component="img"
-          src="/villa/logo.jpg"
+          src="/villa/logo.png"
           alt="Villa Imperial"
           sx={{
             width: 48,

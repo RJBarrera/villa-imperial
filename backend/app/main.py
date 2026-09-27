@@ -98,7 +98,7 @@ async def serve_frontend(
 
     # Archivos reales:
     # /assets/...
-    # /villa/logo.jpg
+    # /villa/logo.png
     # /villa/1.jpg
     # etc.
 

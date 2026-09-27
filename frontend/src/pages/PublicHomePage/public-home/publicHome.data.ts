@@ -11,7 +11,7 @@ export interface Facility {
 }
 
 export const PHOTOS = {
-  logo: "/villa/logo.jpg",
+  logo: "/villa/logo.png",
   heroMain: "/villa/14.jpg",
   heroTop: "/villa/5.jpg",
   heroBottom: "/villa/10.jpg",
