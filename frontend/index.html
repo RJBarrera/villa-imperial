@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Villa Imperial</title>
 
@@ -17,17 +14,53 @@
 
     <meta name="theme-color" content="#173B57" />
 
-    <!-- Favicon navegador -->
     <link rel="icon" type="image/png" href="/villa/logo.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/villa/logo.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
 
-    <!-- iPhone / iPad -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/villa/apple_logo.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <script>
+      const isAdmin = window.location.pathname.startsWith("/admin");
 
-    <!-- Android / PWA -->
-    <link rel="manifest" href="/site.webmanifest" />
+      if (isAdmin) {
+        document.title = "Villa Imperial Admin";
+
+        const appleTitle = document.createElement("meta");
+        appleTitle.name = "apple-mobile-web-app-title";
+        appleTitle.content = "Villa Imperial Admin";
+        document.head.appendChild(appleTitle);
+
+        const appleCapable = document.createElement("meta");
+        appleCapable.name = "apple-mobile-web-app-capable";
+        appleCapable.content = "yes";
+        document.head.appendChild(appleCapable);
+
+        const appleIcon = document.createElement("link");
+        appleIcon.rel = "apple-touch-icon";
+        appleIcon.sizes = "180x180";
+        appleIcon.href = "/villa/apple_admin_v3.png";
+        document.head.appendChild(appleIcon);
+
+        const manifest = document.createElement("link");
+        manifest.rel = "manifest";
+        manifest.href = "/admin.webmanifest?v=3";
+        document.head.appendChild(manifest);
+      } else {
+        const appleTitle = document.createElement("meta");
+        appleTitle.name = "apple-mobile-web-app-title";
+        appleTitle.content = "Villa Imperial";
+        document.head.appendChild(appleTitle);
+
+        const appleIcon = document.createElement("link");
+        appleIcon.rel = "apple-touch-icon";
+        appleIcon.sizes = "180x180";
+        appleIcon.href = "/villa/apple_logo.png";
+        document.head.appendChild(appleIcon);
+
+        const manifest = document.createElement("link");
+        manifest.rel = "manifest";
+        manifest.href = "/site.webmanifest?v=3";
+        document.head.appendChild(manifest);
+      }
+    </script>
   </head>
 
   <body>
