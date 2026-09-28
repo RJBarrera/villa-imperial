@@ -106,9 +106,6 @@ export default function ClientListItem({
           vertical: "top",
           horizontal: "right",
         }}
-        MenuListProps={{
-          "aria-labelledby": `client-menu-button-${client.id}`,
-        }}
         className="client-item-menu"
       >
         <MenuItem
