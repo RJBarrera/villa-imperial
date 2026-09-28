@@ -14,16 +14,23 @@ import {
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { useAuth } from "../../context/AuthContext";
+
+import "./UserMenu.css";
 
 export default function UserMenu() {
   const navigate = useNavigate();
+
   const { user, logout } = useAuth();
+
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   if (!user) {
     return null;
   }
+
+  const menuOpen = Boolean(anchorEl);
 
   const initials = user.full_name
     .split(" ")
@@ -33,9 +40,27 @@ export default function UserMenu() {
     .join("")
     .toUpperCase();
 
-  const handleLogout = async () => {
+  const roleLabel = user.role === "admin" ? "Administrador" : user.role;
+
+  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
     setAnchorEl(null);
+  };
+
+  const handleConfiguration = () => {
+    handleCloseMenu();
+
+    navigate("/admin/configuracion");
+  };
+
+  const handleLogout = async () => {
+    handleCloseMenu();
+
     await logout();
+
     navigate("/admin/login", {
       replace: true,
     });
@@ -43,80 +68,75 @@ export default function UserMenu() {
 
   return (
     <>
-      <Stack direction="row" sx={{ alignItems: "center" }} spacing={1}>
-        <Box
-          sx={{
-            display: {
-              xs: "none",
-              sm: "block",
-            },
+      <Stack direction="row" className="user-menu">
+        {/* INFORMACIÓN */}
 
-            textAlign: "right",
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: 11.5,
-              fontWeight: 600,
-              lineHeight: 1.2,
-              whiteSpace: "nowrap",
-              maxWidth: 180,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {user.full_name}
-          </Typography>
+        <Box className="user-menu__info">
+          <Typography className="user-menu__name">{user.full_name}</Typography>
 
-          <Typography
-            sx={{
-              mt: 0.25,
-              fontSize: 9.5,
-              lineHeight: 1.2,
-              color: "text.secondary",
-              textTransform: "capitalize",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {user.role === "admin" ? "Administrador" : user.role}
-          </Typography>
+          <Typography className="user-menu__role">{roleLabel}</Typography>
         </Box>
 
-        <IconButton onClick={(event) => setAnchorEl(event.currentTarget)}>
-          <Avatar
-            sx={{
-              width: 36,
-              height: 36,
-              bgcolor: "primary.main",
-              fontSize: 11,
-              fontWeight: 700,
-            }}
-          >
-            {initials}
-          </Avatar>
+        {/* AVATAR */}
+
+        <IconButton
+          id="user-menu-button"
+          aria-label="Abrir menú de usuario"
+          aria-controls={menuOpen ? "user-menu-dropdown" : undefined}
+          aria-haspopup="true"
+          aria-expanded={menuOpen ? "true" : undefined}
+          onClick={handleOpenMenu}
+          className="user-menu__button"
+        >
+          <Avatar className="user-menu__avatar">{initials}</Avatar>
         </IconButton>
       </Stack>
 
+      {/* MENÚ */}
+
       <Menu
+        id="user-menu-dropdown"
         anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={() => setAnchorEl(null)}
+        open={menuOpen}
+        onClose={handleCloseMenu}
+        slotProps={{
+          list: {
+            "aria-labelledby": "user-menu-button",
+          },
+        }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        className="user-menu__dropdown"
       >
-        <MenuItem
-          onClick={() => {
-            setAnchorEl(null);
-            navigate("/admin/configuracion");
-          }}
-        >
-          <ListItemIcon>
-            <PersonOutlineOutlined fontSize="small" />
+        <Box className="user-menu__dropdown-header">
+          <Typography className="user-menu__dropdown-name">
+            {user.full_name}
+          </Typography>
+
+          <Typography className="user-menu__dropdown-role">
+            {roleLabel}
+          </Typography>
+        </Box>
+
+        <MenuItem onClick={handleConfiguration} className="user-menu__item">
+          <ListItemIcon className="user-menu__item-icon">
+            <PersonOutlineOutlined />
           </ListItemIcon>
           Configuración
         </MenuItem>
 
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon>
-            <LogoutOutlined fontSize="small" />
+        <MenuItem
+          onClick={handleLogout}
+          className="user-menu__item user-menu__item--logout"
+        >
+          <ListItemIcon className="user-menu__item-icon">
+            <LogoutOutlined />
           </ListItemIcon>
           Cerrar sesión
         </MenuItem>

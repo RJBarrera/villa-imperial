@@ -167,24 +167,308 @@
 }
 
 @media (max-width: 599px) {
+  /* =====================================================
+     HEADER
+     ===================================================== */
+
   .calendar-header {
     flex-direction: column;
     align-items: stretch;
+
+    gap: 12px;
+
+    margin-bottom: 16px;
   }
 
   .calendar-header__title.MuiTypography-root {
     font-size: 24px;
   }
 
+  .calendar-header__subtitle.MuiTypography-root {
+    margin-top: 4px;
+
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
   .calendar-header__button.MuiButton-root {
     width: 100%;
   }
 
+  /* =====================================================
+     CARD
+     ===================================================== */
+
   .calendar-card {
-    padding: 10px;
+    width: 100%;
+
+    padding: 6px 3px;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+  }
+
+  /* =====================================================
+     TOOLBAR DEL MES
+     ===================================================== */
+
+  .calendar-toolbar {
+    margin-bottom: 10px;
+
+    padding: 0 4px;
   }
 
   .calendar-toolbar__month.MuiTypography-root {
-    font-size: 16px;
+    font-size: 15px;
+  }
+
+  .calendar-toolbar .MuiIconButton-root {
+    width: 34px;
+    height: 34px;
+
+    padding: 5px;
+  }
+
+  .calendar-toolbar .MuiSvgIcon-root {
+    font-size: 20px;
+  }
+
+  /* =====================================================
+     CONTENEDOR
+     ===================================================== */
+
+  .calendar-grid-scroll {
+    width: 100%;
+
+    overflow-x: hidden;
+  }
+
+  /* =====================================================
+     GRID
+     ===================================================== */
+
+  .calendar-grid {
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+
+    border: 1px solid #eaecf0;
+    border-radius: 10px;
+
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  /* =====================================================
+     DÍAS DE LA SEMANA
+     ===================================================== */
+
+  .calendar-grid__weekday {
+    min-width: 0;
+
+    padding: 9px 0;
+
+    overflow: hidden;
+
+    background: #f8fafc;
+
+    color: #667085;
+
+    font-size: 9.5px;
+    font-weight: 700;
+
+    text-align: center;
+
+    white-space: nowrap;
+  }
+
+  /* =====================================================
+     CELDAS
+     ===================================================== */
+
+  .calendar-day {
+    min-width: 0;
+
+    min-height: 78px;
+
+    padding: 6px 2px;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border-top: 1px solid #eaecf0;
+    border-right: 1px solid #eaecf0;
+  }
+
+  .calendar-day:hover {
+    background: #f4f7f9;
+  }
+
+  .calendar-day--outside-month {
+    background: #fafbfc;
+
+    opacity: 0.55;
+  }
+
+  .calendar-day:nth-child(7n) {
+    border-right: none;
+  }
+
+  /* =====================================================
+     NÚMERO DEL DÍA
+     ===================================================== */
+
+  .calendar-day__number {
+    width: 28px;
+    height: 28px;
+
+    margin: 0 auto;
+
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .calendar-day__number--today {
+    background: #173b57;
+
+    color: #fff !important;
+
+    font-weight: 700;
+  }
+
+  /* =====================================================
+     RESERVACIONES
+     ===================================================== */
+
+  .calendar-day__bookings {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 4px;
+
+    margin-top: 7px;
+  }
+
+  /*
+   * En móvil los eventos se muestran como indicadores.
+   * Conservamos el color de cada estado.
+   */
+
+  .calendar-booking {
+    width: 7px;
+    height: 7px;
+
+    min-width: 7px;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    font-size: 0;
+
+    white-space: nowrap;
+  }
+
+  /* Pendiente */
+
+  .calendar-booking--pending {
+    background: #d99a2b;
+
+    color: transparent;
+  }
+
+  /* Apartado */
+
+  .calendar-booking--reserved {
+    background: #e9a23b;
+
+    color: transparent;
+  }
+
+  /* Confirmado */
+
+  .calendar-booking--confirmed {
+    background: #2867c8;
+
+    color: transparent;
+  }
+
+  /* Liquidado */
+
+  .calendar-booking--paid {
+    background: #12a26c;
+
+    color: transparent;
+  }
+
+  /* Cancelado */
+
+  .calendar-booking--cancelled {
+    background: #d92d20;
+
+    color: transparent;
+  }
+
+  /* Concluido / Bloqueado */
+
+  .calendar-booking--completed,
+  .calendar-booking--blocked {
+    background: #667085;
+
+    color: transparent;
+  }
+
+  /* =====================================================
+     MÁS EVENTOS
+     ===================================================== */
+
+  .calendar-day__more.MuiChip-root {
+    height: 17px;
+
+    padding: 0 2px;
+
+    font-size: 7.5px;
+  }
+
+  .calendar-day__more .MuiChip-label {
+    padding: 0 4px;
+  }
+}
+
+/* =========================================================
+   MÓVILES MÁS GRANDES
+   ========================================================= */
+
+@media (min-width: 400px) and (max-width: 599px) {
+  .calendar-day {
+    min-height: 84px;
+
+    padding-top: 7px;
+  }
+
+  .calendar-day__number {
+    width: 30px;
+    height: 30px;
+
+    font-size: 11.5px;
+  }
+
+  .calendar-grid__weekday {
+    font-size: 10px;
+  }
+
+  .calendar-booking {
+    width: 8px;
+    height: 8px;
+
+    min-width: 8px;
   }
 }

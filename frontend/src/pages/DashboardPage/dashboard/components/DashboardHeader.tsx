@@ -16,7 +16,7 @@ export default function DashboardHeader({
     <header className="dashboard-header">
       <div className="dashboard-header__content">
         <Typography component="h1" className="dashboard-header__title">
-          Dashboard
+          Panel principal
         </Typography>
         <Typography className="dashboard-header__subtitle">
           Resumen financiero y operativo de Villa Imperial.

@@ -1,14 +1,12 @@
-import {
-  AccountBalanceWalletOutlined,
-  AssessmentOutlined,
-  CalendarMonthOutlined,
-  DashboardOutlined,
-  EventAvailableOutlined,
-  GroupsOutlined,
-  Inventory2Outlined,
-  PaidOutlined,
-  SettingsOutlined,
-} from "@mui/icons-material";
+import AccountBalanceWalletOutlined from "@mui/icons-material/AccountBalanceWalletOutlined";
+import AssessmentOutlined from "@mui/icons-material/AssessmentOutlined";
+import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
+import DashboardOutlined from "@mui/icons-material/DashboardOutlined";
+import EventAvailableOutlined from "@mui/icons-material/EventAvailableOutlined";
+import GroupsOutlined from "@mui/icons-material/GroupsOutlined";
+import Inventory2Outlined from "@mui/icons-material/Inventory2Outlined";
+import PaidOutlined from "@mui/icons-material/PaidOutlined";
+import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
 
 import {
   Box,
@@ -23,7 +21,11 @@ import {
   useTheme,
 } from "@mui/material";
 
+import type { CSSProperties, ReactNode } from "react";
+
 import { useLocation, useNavigate } from "react-router-dom";
+
+import "./Sidebar.css";
 
 export const DRAWER_WIDTH = 270;
 
@@ -32,49 +34,48 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-const menuItems = [
+interface MenuItem {
+  label: string;
+  path: string;
+  icon: ReactNode;
+}
+
+const menuItems: MenuItem[] = [
   {
     label: "Dashboard",
     path: "/admin",
     icon: <DashboardOutlined />,
   },
-
   {
     label: "Calendario",
     path: "/admin/calendario",
     icon: <CalendarMonthOutlined />,
   },
-
   {
     label: "Reservaciones",
     path: "/admin/reservaciones",
     icon: <EventAvailableOutlined />,
   },
-
   {
     label: "Clientes",
     path: "/admin/clientes",
     icon: <GroupsOutlined />,
   },
-
   {
     label: "Pagos",
     path: "/admin/pagos",
     icon: <PaidOutlined />,
   },
-
   {
     label: "Paquetes",
     path: "/admin/paquetes",
     icon: <Inventory2Outlined />,
   },
-
   {
     label: "Gastos",
     path: "/admin/gastos",
     icon: <AccountBalanceWalletOutlined />,
   },
-
   {
     label: "Reportes",
     path: "/admin/reportes",
@@ -85,161 +86,85 @@ const menuItems = [
 export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
+
   const theme = useTheme();
+
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+
   const handleNavigation = (path: string) => {
-    navigate(path);
+    if (location.pathname !== path) {
+      navigate(path);
+    }
 
     if (!isDesktop) {
       onClose();
     }
   };
 
+  const isActive = (path: string) => {
+    if (path === "/admin") {
+      return location.pathname === "/admin";
+    }
+
+    return (
+      location.pathname === path || location.pathname.startsWith(`${path}/`)
+    );
+  };
+
+  const settingsActive = isActive("/admin/configuracion");
+
   const drawerContent = (
-    <Box
-      sx={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        background: "linear-gradient(180deg, #173B57 0%, #102B40 100%)",
-        color: "#FFFFFF",
-      }}
-    >
-      {/* Logo */}
+    <Box className="sidebar">
+      {/* LOGO */}
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1.4,
-          px: 2.2,
-          py: 2.2,
-
-          borderBottom: "1px solid rgba(255,255,255,.10)",
-        }}
-      >
+      <Box className="sidebar__header">
         <Box
           component="img"
           src="/villa/logo.png"
           alt="Villa Imperial"
-          sx={{
-            width: 48,
-            height: 48,
-            objectFit: "cover",
-            borderRadius: "50%",
-            flexShrink: 0,
-            border: "1px solid rgba(255,255,255,.18)",
-            boxShadow: "0 4px 14px rgba(0,0,0,.18)",
-          }}
+          className="sidebar__logo"
         />
 
-        <Box
-          sx={{
-            minWidth: 0,
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: 15,
-              fontWeight: 700,
-              color: "#FFFFFF",
-              lineHeight: 1.2,
-            }}
-          >
+        <Box className="sidebar__brand">
+          <Typography className="sidebar__brand-name">
             Villa Imperial
           </Typography>
 
-          <Typography
-            sx={{
-              mt: 0.3,
-              fontSize: 10,
-              color: "rgba(255,255,255,.62)",
-            }}
-          >
+          <Typography className="sidebar__brand-subtitle">
             Administración
           </Typography>
         </Box>
       </Box>
 
-      <Box sx={{ px: 2 }}>
-        <Divider
-          sx={{
-            borderColor: "rgba(255,255,255,.10)",
-          }}
-        />
-      </Box>
-
-      {/* Menu */}
+      {/* MENÚ */}
 
       <Box
-        sx={{
-          px: 1.5,
-          mt: 2,
-          flex: 1,
-        }}
+        component="nav"
+        className="sidebar__navigation"
+        aria-label="Menú principal"
       >
-        <Typography
-          sx={{
-            px: 2,
-            mb: 1,
-            fontSize: 10.5,
-            fontWeight: 600,
-            textTransform: "uppercase",
-            letterSpacing: 1.3,
-            color: "rgba(255,255,255,.45)",
-          }}
-        >
+        <Typography className="sidebar__section-title">
           Menú principal
         </Typography>
 
-        <List disablePadding>
+        <List disablePadding className="sidebar__menu">
           {menuItems.map((item) => {
-            const active =
-              item.path === "/"
-                ? location.pathname === "/"
-                : location.pathname.startsWith(item.path);
+            const active = isActive(item.path);
 
             return (
               <ListItemButton
                 key={item.path}
                 selected={active}
                 onClick={() => handleNavigation(item.path)}
-                sx={{
-                  borderRadius: "12px",
-                  mb: 0.6,
-                  px: 2,
-                  minHeight: 48,
-                  color: active ? "#FFFFFF" : "rgba(255,255,255,.72)",
-                  "& .MuiListItemIcon-root": {
-                    color: active ? "#D7B66F" : "rgba(255,255,255,.65)",
-                  },
-                  "&.Mui-selected": {
-                    backgroundColor: "rgba(255,255,255,.10)",
-                  },
-                  "&.Mui-selected:hover": {
-                    backgroundColor: "rgba(255,255,255,.13)",
-                  },
-                  "&:hover": {
-                    backgroundColor: "rgba(255,255,255,.07)",
-                  },
-                }}
+                className="sidebar__menu-item"
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 39,
-                  }}
-                >
+                <ListItemIcon className="sidebar__menu-icon">
                   {item.icon}
                 </ListItemIcon>
 
                 <ListItemText
                   primary={item.label}
-                  sx={{
-                    "& .MuiListItemText-primary": {
-                      fontSize: 14,
-                      fontWeight: active ? 600 : 500,
-                    },
-                  }}
+                  className="sidebar__menu-text"
                 />
               </ListItemButton>
             );
@@ -247,96 +172,56 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
         </List>
       </Box>
 
-      {/* Settings */}
+      {/* CONFIGURACIÓN */}
 
-      <Box sx={{ px: 1.5, pb: 2 }}>
-        <Divider
-          sx={{
-            mb: 1.5,
-            borderColor: "rgba(255,255,255,.10)",
-          }}
-        />
+      <Box className="sidebar__footer">
+        <Divider className="sidebar__footer-divider" />
 
         <ListItemButton
-          selected={location.pathname.startsWith("/admin/configuracion")}
+          selected={settingsActive}
           onClick={() => handleNavigation("/admin/configuracion")}
-          sx={{
-            borderRadius: "12px",
-            color: "rgba(255,255,255,.72)",
-            "& .MuiListItemIcon-root": {
-              color: "rgba(255,255,255,.65)",
-            },
-            "&.Mui-selected": {
-              color: "#FFFFFF",
-              backgroundColor: "rgba(255,255,255,.10)",
-            },
-          }}
+          className="sidebar__menu-item sidebar__settings"
         >
-          <ListItemIcon
-            sx={{
-              minWidth: 39,
-            }}
-          >
+          <ListItemIcon className="sidebar__menu-icon">
             <SettingsOutlined />
           </ListItemIcon>
 
           <ListItemText
             primary="Configuración"
-            sx={{
-              "& .MuiListItemText-primary": {
-                fontSize: 14,
-                fontWeight: 500,
-              },
-            }}
+            className="sidebar__menu-text"
           />
         </ListItemButton>
       </Box>
     </Box>
   );
 
+  const drawerStyle = {
+    "--sidebar-width": `${DRAWER_WIDTH}px`,
+  } as CSSProperties;
+
   return (
     <>
-      {/* Desktop */}
+      {/* DESKTOP */}
 
       <Drawer
         variant="permanent"
         open
-        sx={{
-          display: {
-            xs: "none",
-            md: "block",
-          },
-          width: DRAWER_WIDTH,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: DRAWER_WIDTH,
-            boxSizing: "border-box",
-            border: "none",
-          },
-        }}
+        className="sidebar__drawer sidebar__drawer--desktop"
+        style={drawerStyle}
       >
         {drawerContent}
       </Drawer>
 
-      {/* Mobile */}
+      {/* MOBILE */}
 
       <Drawer
         variant="temporary"
         open={mobileOpen}
         onClose={onClose}
+        className="sidebar__drawer sidebar__drawer--mobile"
+        style={drawerStyle}
         ModalProps={{
           keepMounted: true,
-        }}
-        sx={{
-          display: {
-            xs: "block",
-            md: "none",
-          },
-          "& .MuiDrawer-paper": {
-            width: DRAWER_WIDTH,
-            boxSizing: "border-box",
-            border: "none",
-          },
         }}
       >
         {drawerContent}

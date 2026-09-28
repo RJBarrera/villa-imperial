@@ -1,0 +1,264 @@
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar.MuiAppBar-root {
+  width: calc(100% - var(--topbar-drawer-width));
+
+  margin-left: var(--topbar-drawer-width);
+
+  color: #101828;
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom: 1px solid #eaecf0;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow: none;
+
+  /*
+    Drawer de MUI normalmente utiliza z-index 1200.
+    El Topbar debe permanecer debajo del drawer.
+  */
+  z-index: 1199;
+}
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.topbar__toolbar.MuiToolbar-root {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 76px;
+
+  padding-right: 28px;
+  padding-left: 28px;
+}
+
+/* =========================================================
+   IZQUIERDA
+   ========================================================= */
+
+.topbar__left.MuiStack-root {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  gap: 12px;
+}
+
+/* BOTÓN MENÚ */
+
+.topbar__menu-button.MuiIconButton-root {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  color: #173b57;
+
+  border-radius: 10px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.topbar__menu-button.MuiIconButton-root:hover {
+  color: #102d43;
+  background: #f2f6f8;
+}
+
+.topbar__menu-button .MuiSvgIcon-root {
+  font-size: 23px;
+}
+
+/* =========================================================
+   MARCA
+   ========================================================= */
+
+.topbar__brand {
+  min-width: 0;
+}
+
+.topbar__title.MuiTypography-root {
+  margin: 0;
+
+  color: #101828;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+.topbar__subtitle.MuiTypography-root {
+  margin-top: 3px;
+
+  color: #667085;
+
+  font-size: 11px;
+  font-weight: 400;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   DERECHA
+   ========================================================= */
+
+.topbar__right.MuiStack-root {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  gap: 10px;
+
+  margin-left: auto;
+}
+
+/* =========================================================
+   NOTIFICACIONES
+   ========================================================= */
+
+.topbar__notification-button.MuiIconButton-root {
+  width: 40px;
+  height: 40px;
+
+  color: #475467;
+
+  border-radius: 10px;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.topbar__notification-button.MuiIconButton-root:hover {
+  color: #173b57;
+  background: #f2f6f8;
+}
+
+.topbar__notification-button .MuiSvgIcon-root {
+  font-size: 22px;
+}
+
+.topbar__notification-badge .MuiBadge-badge {
+  min-width: 17px;
+  height: 17px;
+
+  padding: 0 4px;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   SEPARADOR
+   ========================================================= */
+
+.topbar__divider {
+  width: 1px;
+  height: 32px;
+
+  margin: 0 4px;
+
+  flex-shrink: 0;
+
+  background: #eaecf0;
+}
+
+/* =========================================================
+   TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 899px) {
+  .topbar.MuiAppBar-root {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .topbar__toolbar.MuiToolbar-root {
+    min-height: 68px;
+
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .topbar__menu-button.MuiIconButton-root {
+    display: inline-flex;
+  }
+
+  .topbar__title.MuiTypography-root {
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 599px) {
+  .topbar__toolbar.MuiToolbar-root {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .topbar__left.MuiStack-root {
+    gap: 8px;
+  }
+
+  .topbar__right.MuiStack-root {
+    gap: 2px;
+  }
+
+  .topbar__subtitle.MuiTypography-root {
+    display: none;
+  }
+
+  .topbar__divider {
+    display: none;
+  }
+
+  .topbar__notification-button.MuiIconButton-root {
+    width: 38px;
+    height: 38px;
+  }
+
+  .topbar__notification-button .MuiSvgIcon-root {
+    font-size: 21px;
+  }
+}
+
+/* =========================================================
+   MOBILE PEQUEÑO
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .topbar__toolbar.MuiToolbar-root {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .topbar__title.MuiTypography-root {
+    font-size: 15px;
+  }
+
+  .topbar__menu-button.MuiIconButton-root,
+  .topbar__notification-button.MuiIconButton-root {
+    width: 36px;
+    height: 36px;
+  }
+}
