@@ -18,7 +18,11 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { getClients } from "../../api/clients";
-import { checkAvailability, createBooking } from "../../api/bookings";
+import {
+  checkAvailability,
+  createBooking,
+  getPackagePrice,
+} from "../../api/bookings";
 import { getPackages } from "../../api/packages";
 import type { PaymentMethod } from "../../types/booking";
 
@@ -65,6 +69,17 @@ function formatCurrency(value: string | number) {
   }).format(Number(value));
 }
 
+
+const WEEKDAY_LABELS = [
+  "lunes",
+  "martes",
+  "miércoles",
+  "jueves",
+  "viernes",
+  "sábado",
+  "domingo",
+];
+
 export default function ReservationDialog({
   open,
   onClose,
@@ -100,11 +115,60 @@ export default function ReservationDialog({
     [packages, form.package_id],
   );
 
+  const {
+    data: packagePrice,
+    isLoading: packagePriceLoading,
+    isError: packagePriceError,
+  } = useQuery({
+    queryKey: [
+      "package-price",
+      form.package_id,
+      form.event_date,
+    ],
+    queryFn: () =>
+      getPackagePrice(
+        form.package_id,
+        form.event_date,
+      ),
+    enabled: Boolean(
+      open &&
+        form.package_id &&
+        form.event_date,
+    ),
+  });
+
+  const agreedPrice = Number(
+    packagePrice?.effective_price ??
+      selectedPackage?.base_price ??
+      0,
+  );
+
   const discount = Number(form.discount || 0);
+
   const finalPrice = Math.max(
-    Number(selectedPackage?.base_price ?? 0) - discount,
+    agreedPrice - discount,
     0,
   );
+
+  const packagePriceDescription = useMemo(() => {
+    if (!packagePrice) {
+      return null;
+    }
+
+    if (packagePrice.source === "promotion") {
+      return packagePrice.promotion_name
+        ? `Promoción: ${packagePrice.promotion_name}`
+        : "Promoción vigente";
+    }
+
+    if (packagePrice.source === "day") {
+      return `Precio correspondiente al ${
+        WEEKDAY_LABELS[packagePrice.day_of_week] ?? "día seleccionado"
+      }`;
+    }
+
+    return "Precio base";
+  }, [packagePrice]);
 
   const mutation = useMutation({
     mutationFn: createBooking,
@@ -372,8 +436,7 @@ export default function ReservationDialog({
             >
               {packages.map((rentalPackage) => (
                 <MenuItem key={rentalPackage.id} value={rentalPackage.id}>
-                  {rentalPackage.name} —{" "}
-                  {formatCurrency(rentalPackage.base_price)}
+                  {rentalPackage.name}
                 </MenuItem>
               ))}
             </TextField>
@@ -412,17 +475,42 @@ export default function ReservationDialog({
                   </Typography>
                 </Box>
 
-                <Typography
-                  sx={{
-                    fontSize: 23,
-                    fontWeight: 700,
-                    color: "primary.main",
-                  }}
-                >
-                  {formatCurrency(selectedPackage.base_price)}
-                </Typography>
+                <Box sx={{ textAlign: { xs: "left", sm: "right" } }}>
+                  <Typography
+                    sx={{
+                      fontSize: 23,
+                      fontWeight: 700,
+                      color: "primary.main",
+                    }}
+                  >
+                    {packagePriceLoading
+                      ? "Calculando..."
+                      : formatCurrency(agreedPrice)}
+                  </Typography>
+
+                  {!packagePriceLoading && packagePriceDescription && (
+                    <Typography
+                      sx={{
+                        mt: 0.3,
+                        fontSize: 10.5,
+                        color:
+                          packagePrice?.source === "promotion"
+                            ? "success.main"
+                            : "text.secondary",
+                      }}
+                    >
+                      {packagePriceDescription}
+                    </Typography>
+                  )}
+                </Box>
               </Stack>
             </Box>
+          )}
+
+          {selectedPackage && packagePriceError && (
+            <Alert severity="error">
+              No fue posible consultar el precio para la fecha seleccionada.
+            </Alert>
           )}
 
           <Button
@@ -531,9 +619,28 @@ export default function ReservationDialog({
                     </Typography>
 
                     <Typography sx={{ fontSize: 12 }}>
-                      {formatCurrency(selectedPackage.base_price)}
+                      {packagePriceLoading
+                        ? "Calculando..."
+                        : formatCurrency(agreedPrice)}
                     </Typography>
                   </Stack>
+
+                  {packagePriceDescription && !packagePriceLoading && (
+                    <Typography
+                      sx={{
+                        mt: -0.2,
+                        mb: 0.3,
+                        fontSize: 10.5,
+                        textAlign: "right",
+                        color:
+                          packagePrice?.source === "promotion"
+                            ? "success.main"
+                            : "text.secondary",
+                      }}
+                    >
+                      {packagePriceDescription}
+                    </Typography>
+                  )}
 
                   <Stack direction="row" sx={{ justifyContent: "space-between" }}>
                     <Typography sx={{ fontSize: 12 }} color="text.secondary">
@@ -584,6 +691,8 @@ export default function ReservationDialog({
           onClick={handleSubmit}
           disabled={
             mutation.isPending ||
+            packagePriceLoading ||
+            packagePriceError ||
             !form.client_id ||
             !form.package_id ||
             !form.event_date ||

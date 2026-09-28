@@ -1,0 +1,145 @@
+.vi-public-price {
+  margin-top: 18px;
+}
+
+.vi-public-price__label {
+  display: block;
+  margin-bottom: 4px;
+  color: #667085;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.vi-public-price__old {
+  display: block;
+  margin-bottom: 4px;
+  color: #98a2b3;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.vi-package-card__price--promo strong {
+  color: #14724f;
+}
+
+.vi-public-promotion {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.vi-public-promotion--active {
+  border: 1px solid #ccebdc;
+  background: #eefaf4;
+  color: #14724f;
+}
+
+.vi-public-promotion--scheduled {
+  border: 1px solid #f0deb2;
+  background: #fff9ec;
+  color: #9a6700;
+}
+
+.vi-public-promotion > span {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.vi-public-promotion > strong {
+  font-size: 12px;
+}
+
+.vi-public-promotion > small {
+  color: #667085;
+  font-size: 10px;
+}
+
+.vi-public-day-prices {
+  margin-top: 16px;
+  padding: 11px 12px;
+  border: 1px solid #eaecf0;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.vi-public-day-prices__title {
+  display: block;
+  margin-bottom: 8px;
+  color: #667085;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.vi-public-day-prices__list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.vi-public-day-prices__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 10.5px;
+}
+
+.vi-public-day-prices__row strong {
+  color: #173b57;
+  font-weight: 700;
+}
+
+.vi-public-selected-package {
+  align-items: flex-start;
+}
+
+.vi-public-selected-package > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vi-public-selected-package__source {
+  margin-top: 4px;
+  color: #667085;
+  font-size: 10px;
+}
+
+.vi-public-selected-package__source--promo {
+  color: #14724f;
+  font-weight: 700;
+}
+
+.vi-public-selected-package__price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.vi-public-selected-package__price > span {
+  color: #98a2b3;
+  font-size: 10.5px;
+  text-decoration: line-through;
+}
+
+.vi-public-selected-package__price > b {
+  color: #173b57;
+}
+
+@media (max-width: 599px) {
+  .vi-public-selected-package {
+    gap: 12px;
+  }
+
+  .vi-public-selected-package__price {
+    align-items: flex-start;
+  }
+}

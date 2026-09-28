@@ -18,6 +18,24 @@ export interface PublicBusiness {
   minimum_deposit: string;
 }
 
+export interface PublicPackageDayPrice {
+  day_of_week: number;
+
+  price: string;
+}
+
+export interface PublicPackagePromotion {
+  name: string;
+
+  promotional_price: string;
+
+  starts_on: string;
+
+  ends_on: string;
+
+  is_active: boolean;
+}
+
 export interface PublicPackage {
   id: string;
 
@@ -32,6 +50,35 @@ export interface PublicPackage {
   duration_hours: number;
 
   services: string[];
+
+  day_prices: PublicPackageDayPrice[];
+
+  promotions: PublicPackagePromotion[];
+}
+
+export type PublicPackagePriceSource =
+  | "base"
+  | "day"
+  | "promotion";
+
+export interface PublicPackagePrice {
+  package_id: string;
+
+  target_date: string;
+
+  day_of_week: number;
+
+  base_price: string;
+
+  day_price: string | null;
+
+  promotional_price: string | null;
+
+  effective_price: string;
+
+  source: PublicPackagePriceSource;
+
+  promotion_name: string | null;
 }
 
 export interface PublicCalendarDay {

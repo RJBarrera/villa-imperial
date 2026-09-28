@@ -5,6 +5,7 @@ import type {
   PublicBusiness,
   PublicCalendar,
   PublicPackage,
+  PublicPackagePrice,
 } from "../types/public";
 
 export async function getPublicBusiness(): Promise<PublicBusiness> {
@@ -14,6 +15,22 @@ export async function getPublicBusiness(): Promise<PublicBusiness> {
 
 export async function getPublicPackages(): Promise<PublicPackage[]> {
   const response = await http.get<PublicPackage[]>("/public/packages");
+  return response.data;
+}
+
+export async function getPublicPackagePrice(
+  packageId: string,
+  eventDate: string,
+): Promise<PublicPackagePrice> {
+  const response = await http.get<PublicPackagePrice>(
+    `/public/packages/${packageId}/price`,
+    {
+      params: {
+        target_date: eventDate,
+      },
+    },
+  );
+
   return response.data;
 }
 

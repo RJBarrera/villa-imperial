@@ -6,6 +6,7 @@ import type {
   Booking,
   BookingStatus,
   CreateBookingPayload,
+  PackagePriceResponse,
   UpdateBookingPayload,
 } from "../types/booking";
 
@@ -26,6 +27,23 @@ export async function getBookings(
 
 export async function getBooking(bookingId: string): Promise<Booking> {
   const response = await http.get<Booking>(`/bookings/${bookingId}`);
+  return response.data;
+}
+
+
+export async function getPackagePrice(
+  packageId: string,
+  eventDate: string,
+): Promise<PackagePriceResponse> {
+  const response = await http.get<PackagePriceResponse>(
+    `/packages/${packageId}/price`,
+    {
+      params: {
+        target_date: eventDate,
+      },
+    },
+  );
+
   return response.data;
 }
 

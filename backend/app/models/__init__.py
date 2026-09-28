@@ -5,6 +5,12 @@ from app.models.business_settings import (
 )
 from app.models.client import Client
 from app.models.expense import Expense
+from app.models.package_day_price import (
+    PackageDayPrice,
+)
+from app.models.package_promotion import (
+    PackagePromotion,
+)
 from app.models.payment import Payment
 from app.models.rental_package import (
     RentalPackage,
@@ -17,6 +23,8 @@ __all__ = [
     "BusinessSettings",
     "Client",
     "Expense",
+    "PackageDayPrice",
+    "PackagePromotion",
     "Payment",
     "RentalPackage",
     "Service",

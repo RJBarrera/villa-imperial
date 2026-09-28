@@ -9,6 +9,29 @@ export type BookingStatus =
 
 export type PaymentMethod = "efectivo" | "transferencia" | "tarjeta" | "otro";
 
+
+export type PackagePriceSource = "base" | "day" | "promotion";
+
+export interface PackagePriceResponse {
+  package_id: string;
+
+  target_date: string;
+
+  day_of_week: number;
+
+  base_price: string;
+
+  day_price: string | null;
+
+  promotional_price: string | null;
+
+  effective_price: string;
+
+  source: PackagePriceSource;
+
+  promotion_name: string | null;
+}
+
 export interface BookingClient {
   id: string;
 

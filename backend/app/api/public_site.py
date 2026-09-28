@@ -47,7 +47,12 @@ from app.schemas.public import (
     PublicAvailabilityResponse,
     PublicBusinessResponse,
     PublicCalendarResponse,
+    PublicPackagePriceResponse,
     PublicPackageResponse,
+)
+
+from app.services.package_pricing import (
+    calculate_package_price,
 )
 
 router = APIRouter(
@@ -117,7 +122,11 @@ def get_public_packages(
     packages = (
         db.scalars(
             select(RentalPackage)
-            .options(selectinload(RentalPackage.services))
+            .options(
+                selectinload(RentalPackage.services),
+                selectinload(RentalPackage.day_prices),
+                selectinload(RentalPackage.promotions),
+            )
             .where(RentalPackage.is_active.is_(True))
             .order_by(RentalPackage.base_price.asc())
         )
@@ -134,11 +143,63 @@ def get_public_packages(
             "base_price": rental_package.base_price,
             "duration_hours": rental_package.duration_hours,
             "services": [
-                service.name for service in rental_package.services if service.is_active
+                service.name
+                for service in rental_package.services
+                if service.is_active
+            ],
+            "day_prices": [
+                {
+                    "day_of_week": day_price.day_of_week,
+                    "price": day_price.price,
+                }
+                for day_price in rental_package.day_prices
+            ],
+            "promotions": [
+                {
+                    "name": promotion.name,
+                    "promotional_price": promotion.promotional_price,
+                    "starts_on": promotion.starts_on,
+                    "ends_on": promotion.ends_on,
+                    "is_active": promotion.is_active,
+                }
+                for promotion in rental_package.promotions
             ],
         }
         for rental_package in packages
     ]
+
+
+@router.get(
+    "/packages/{package_id}/price",
+    response_model=PublicPackagePriceResponse,
+)
+def get_public_package_price(
+    package_id: uuid.UUID,
+    target_date: date,
+    db: Session = Depends(get_db),
+):
+    rental_package = db.scalar(
+        select(RentalPackage)
+        .options(
+            selectinload(RentalPackage.day_prices),
+            selectinload(RentalPackage.promotions),
+        )
+        .where(
+            RentalPackage.id == package_id,
+            RentalPackage.is_active.is_(True),
+        )
+    )
+
+    if rental_package is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Paquete no encontrado.",
+        )
+
+    return calculate_package_price(
+        rental_package,
+        target_date,
+    )
 
 
 # =========================================

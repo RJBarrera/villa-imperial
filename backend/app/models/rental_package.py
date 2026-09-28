@@ -7,6 +7,8 @@ from sqlalchemy.types import Uuid
 
 from app.db.base import Base
 from app.models.mixins import TimestampMixin
+from app.models.package_day_price import PackageDayPrice
+from app.models.package_promotion import PackagePromotion
 from app.models.package_service import package_services
 
 
@@ -62,4 +64,20 @@ class RentalPackage(Base, TimestampMixin):
     bookings = relationship(
         "Booking",
         back_populates="rental_package",
+    )
+
+    day_prices: Mapped[list["PackageDayPrice"]] = relationship(
+        "PackageDayPrice",
+        back_populates="rental_package",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+        order_by="PackageDayPrice.day_of_week",
+    )
+
+    promotions: Mapped[list["PackagePromotion"]] = relationship(
+        "PackagePromotion",
+        back_populates="rental_package",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+        order_by="PackagePromotion.starts_on.desc()",
     )

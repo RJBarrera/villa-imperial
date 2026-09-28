@@ -4,6 +4,7 @@ from datetime import (
 )
 
 from decimal import Decimal
+from typing import Literal
 from uuid import UUID
 
 from pydantic import BaseModel
@@ -29,6 +30,24 @@ class PublicBusinessResponse(BaseModel):
     minimum_deposit: Decimal
 
 
+class PublicPackageDayPriceResponse(BaseModel):
+    day_of_week: int
+
+    price: Decimal
+
+
+class PublicPackagePromotionResponse(BaseModel):
+    name: str
+
+    promotional_price: Decimal
+
+    starts_on: date
+
+    ends_on: date
+
+    is_active: bool
+
+
 class PublicPackageResponse(BaseModel):
     id: UUID
 
@@ -43,6 +62,34 @@ class PublicPackageResponse(BaseModel):
     duration_hours: int
 
     services: list[str]
+
+    day_prices: list[PublicPackageDayPriceResponse]
+
+    promotions: list[PublicPackagePromotionResponse]
+
+
+class PublicPackagePriceResponse(BaseModel):
+    package_id: UUID
+
+    target_date: date
+
+    day_of_week: int
+
+    base_price: Decimal
+
+    day_price: Decimal | None = None
+
+    promotional_price: Decimal | None = None
+
+    effective_price: Decimal
+
+    source: Literal[
+        "base",
+        "day",
+        "promotion",
+    ]
+
+    promotion_name: str | None = None
 
 
 class PublicCalendarDayResponse(BaseModel):

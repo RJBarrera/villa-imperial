@@ -59,6 +59,11 @@ from app.schemas.payment import (
     PaymentCreate,
 )
 
+
+from app.services.package_pricing import (
+    calculate_package_price,
+)
+
 router = APIRouter(
     prefix="/bookings",
     tags=["Bookings"],
@@ -274,7 +279,14 @@ def create_booking(
             },
         )
 
-    agreed_price = Decimal(rental_package.base_price)
+    price_result = calculate_package_price(
+        rental_package,
+        data.event_date,
+    )
+
+    agreed_price = Decimal(
+        str(price_result["effective_price"])
+    )
 
     if data.discount > agreed_price:
         raise HTTPException(
@@ -437,8 +449,25 @@ def update_booking(
             },
         )
 
-    if package_changed:
-        new_agreed_price = Decimal(rental_package.base_price)
+    event_date_changed = (
+        data.event_date is not None
+        and data.event_date != current_local_start.date()
+    )
+
+    price_must_be_recalculated = (
+        package_changed
+        or event_date_changed
+    )
+
+    if price_must_be_recalculated:
+        price_result = calculate_package_price(
+            rental_package,
+            new_date,
+        )
+
+        new_agreed_price = Decimal(
+            str(price_result["effective_price"])
+        )
     else:
         new_agreed_price = booking.agreed_price
 
@@ -469,6 +498,7 @@ def update_booking(
     if package_changed:
         booking.package_name_snapshot = rental_package.name
 
+    if price_must_be_recalculated:
         booking.agreed_price = new_agreed_price
 
     booking.discount = new_discount
