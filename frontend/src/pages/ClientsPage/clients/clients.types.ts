@@ -1,6 +1,3 @@
-export interface ClientListItem {
-  id: string;
-  full_name: string;
-  phone: string;
-  email?: string | null;
-}
+import type { Client } from "../../../types/client";
+
+export type ClientListItem = Client;

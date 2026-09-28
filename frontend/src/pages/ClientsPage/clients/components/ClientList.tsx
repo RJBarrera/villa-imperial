@@ -3,13 +3,24 @@ import ClientListItem from "./ClientListItem";
 
 interface ClientListProps {
   clients: ClientItem[];
+  onEdit: (client: ClientItem) => void;
+  onDelete: (client: ClientItem) => void;
 }
 
-export default function ClientList({ clients }: ClientListProps) {
+export default function ClientList({
+  clients,
+  onEdit,
+  onDelete,
+}: ClientListProps) {
   return (
     <div className="clients-list">
       {clients.map((client) => (
-        <ClientListItem key={client.id} client={client} />
+        <ClientListItem
+          key={client.id}
+          client={client}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
       ))}
     </div>
   );

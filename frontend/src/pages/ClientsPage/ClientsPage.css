@@ -222,3 +222,185 @@
     max-width: 100%;
   }
 }
+
+
+/* =========================================================
+   MENÚ DE ACCIONES
+   ========================================================= */
+
+.client-item__menu.MuiIconButton-root {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: #667085;
+  border-radius: 9px;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.client-item__menu.MuiIconButton-root:hover {
+  color: #173b57;
+  background: #f2f6f8;
+}
+
+.client-item-menu .MuiPaper-root {
+  min-width: 185px;
+  margin-top: 5px;
+  padding: 4px;
+  border: 1px solid #eaecf0;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(16, 24, 40, 0.12);
+}
+
+.client-item-menu .MuiMenu-list {
+  padding: 0;
+}
+
+.client-item-menu__item.MuiMenuItem-root {
+  min-height: 38px;
+  padding: 7px 9px;
+  color: #344054;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 7px;
+}
+
+.client-item-menu__item.MuiMenuItem-root:hover {
+  color: #173b57;
+  background: #f5f8fa;
+}
+
+.client-item-menu__icon.MuiListItemIcon-root {
+  min-width: 31px;
+  color: #667085;
+}
+
+.client-item-menu__icon .MuiSvgIcon-root {
+  font-size: 18px;
+}
+
+.client-item-menu__item--delete.MuiMenuItem-root {
+  color: #b42318;
+}
+
+.client-item-menu__item--delete .client-item-menu__icon {
+  color: #d92d20;
+}
+
+.client-item-menu__item--delete.MuiMenuItem-root:hover {
+  color: #b42318;
+  background: #fff5f4;
+}
+
+/* =========================================================
+   EDITAR CLIENTE
+   ========================================================= */
+
+.client-dialog .MuiDialog-paper {
+  border-radius: 14px;
+}
+
+.client-dialog__title.MuiDialogTitle-root {
+  padding: 22px 24px 10px;
+  color: #101828;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.client-dialog__content.MuiDialogContent-root {
+  padding: 14px 24px 8px;
+}
+
+.client-dialog__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 4px;
+}
+
+.client-dialog__actions.MuiDialogActions-root {
+  gap: 8px;
+  padding: 16px 24px 22px;
+}
+
+/* =========================================================
+   ELIMINAR CLIENTE
+   ========================================================= */
+
+.client-delete-dialog .MuiDialog-paper {
+  border-radius: 14px;
+}
+
+.client-delete-dialog__title.MuiDialogTitle-root {
+  padding: 22px 24px 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.client-delete-dialog__content.MuiDialogContent-root {
+  padding: 14px 24px 8px;
+  text-align: center;
+}
+
+.client-delete-dialog__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 4px auto 14px;
+  color: #d92d20;
+  background: #fff1f0;
+  border-radius: 50%;
+}
+
+.client-delete-dialog__icon .MuiSvgIcon-root {
+  font-size: 24px;
+}
+
+.client-delete-dialog__question.MuiTypography-root {
+  color: #101828;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.client-delete-dialog__description.MuiTypography-root {
+  max-width: 320px;
+  margin: 8px auto 0;
+  color: #667085;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+
+.client-delete-dialog__alert.MuiAlert-root {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.client-delete-dialog__actions.MuiDialogActions-root {
+  gap: 8px;
+  padding: 16px 24px 22px;
+}
+
+@media (max-width: 599px) {
+  .client-item-menu .MuiPaper-root {
+    min-width: 175px;
+  }
+
+  .client-dialog .MuiDialog-paper,
+  .client-delete-dialog .MuiDialog-paper {
+    width: calc(100% - 32px);
+    margin: 16px;
+  }
+
+  .client-dialog__title.MuiDialogTitle-root,
+  .client-delete-dialog__title.MuiDialogTitle-root,
+  .client-dialog__content.MuiDialogContent-root,
+  .client-delete-dialog__content.MuiDialogContent-root,
+  .client-dialog__actions.MuiDialogActions-root,
+  .client-delete-dialog__actions.MuiDialogActions-root {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+}

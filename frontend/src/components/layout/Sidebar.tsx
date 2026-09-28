@@ -42,7 +42,7 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
-    label: "Dashboard",
+    label: "Panel principal",
     path: "/admin",
     icon: <DashboardOutlined />,
   },
