@@ -39,10 +39,6 @@ function bookingSchedule(booking: Booking): string {
   return `${start} a ${end}`;
 }
 
-/**
- * Villa Imperial opera en México. A los teléfonos de 10 dígitos
- * se les añade +52; números internacionales deben incluir +.
- */
 export function normalizeClientWhatsApp(phone: string): string | null {
   const raw = phone.trim();
   const digits = raw.replace(/\D/g, "");
@@ -52,9 +48,11 @@ export function normalizeClientWhatsApp(phone: string): string | null {
   if (digits.length === 13 && digits.startsWith("521")) {
     return `52${digits.slice(3)}`;
   }
+
   if (raw.startsWith("+") && digits.length >= 8 && digits.length <= 15) {
     return digits;
   }
+
   return null;
 }
 
@@ -64,6 +62,7 @@ export function createBookingWhatsAppLink(
 ): string | null {
   const normalized = normalizeClientWhatsApp(phone);
   if (!normalized || !message.trim()) return null;
+
   return `https://wa.me/${normalized}?text=${encodeURIComponent(message)}`;
 }
 
@@ -72,10 +71,11 @@ export function buildBookingWhatsAppMessage(
   action: BookingWhatsAppAction,
 ): string {
   const name = booking.client.full_name;
-  const header = `*Villa Imperial*\nFolio: ${booking.folio}`;
+  const header = `🏛️ *Villa Imperial*\nFolio: ${booking.folio}`;
+
   const basics = [
     `Evento: ${booking.event_type}`,
-    `Fecha: ${bookingDate(booking)}`,
+    `📅 Fecha: ${bookingDate(booking)}`,
     `Horario: ${bookingSchedule(booking)}`,
     `Paquete: ${booking.package_name_snapshot}`,
   ].join("\n");
@@ -83,7 +83,8 @@ export function buildBookingWhatsAppMessage(
   switch (action) {
     case "resumen":
       return [
-        `Hola, ${name}. Te compartimos el resumen de tu reservación:`,
+        `Hola, ${name}. 👋`,
+        "Te compartimos el resumen de tu reservación:",
         "",
         header,
         basics,
@@ -91,50 +92,63 @@ export function buildBookingWhatsAppMessage(
         "",
         `Importe total: ${money(booking.final_price)}`,
         `Total recibido: ${money(booking.total_paid)}`,
-        `Saldo pendiente: ${money(booking.balance)}`,
+        `💰 *Saldo pendiente: ${money(booking.balance)}*`,
         "",
-        "Este mensaje es un resumen informativo de la reservación.",
+        "Este mensaje es un resumen informativo de tu reservación.",
         "Para cualquier aclaración estamos a tus órdenes.",
+        "",
+        "¡Gracias por elegir Villa Imperial!",
       ].join("\n");
 
     case "confirmacion":
       return [
-        `Hola, ${name}. Confirmamos los datos de tu evento en Villa Imperial:`,
+        `Hola, ${name}. 👋`,
+        "Nos complace confirmar los datos de tu evento:",
         "",
         header,
         basics,
         "",
         booking.status === "liquidado"
-          ? "Tu reservación está confirmada y liquidada."
-          : "Tu reservación se encuentra confirmada.",
-        "¡Gracias por elegirnos!",
+          ? "✅ *Tu reservación está confirmada y liquidada.*"
+          : "✅ *Tu reservación se encuentra confirmada.*",
+        "",
+        "Agradecemos tu confianza.",
+        "¡Será un gusto formar parte de tu celebración!",
       ].join("\n");
 
     case "evento":
       return [
-        `Hola, ${name}. Te enviamos un recordatorio de tu próximo evento en Villa Imperial:`,
+        `Hola, ${name}. 👋`,
+        "Te enviamos un recordatorio de tu próximo evento:",
         "",
         header,
         basics,
         "",
         "Si tienes alguna duda o necesitas revisar los detalles, estamos a tus órdenes.",
-        "¡Te esperamos!",
+        "",
+        "🎉 ¡Te esperamos para celebrar juntos!",
+        "*Villa Imperial*",
       ].join("\n");
 
     case "pago":
       return [
-        `Hola, ${name}. Te compartimos un recordatorio amable del saldo de tu reservación en Villa Imperial:`,
+        `Hola, ${name}. 👋`,
+        "Te compartimos un amable recordatorio del saldo pendiente de tu reservación:",
         "",
         header,
         `Evento: ${booking.event_type}`,
-        `Fecha: ${bookingDate(booking)}`,
+        `📅 Fecha: ${bookingDate(booking)}`,
+        "",
         `Total: ${money(booking.final_price)}`,
         `Pagado: ${money(booking.total_paid)}`,
-        `*Saldo pendiente: ${money(booking.balance)}*`,
+        `💰 *Saldo pendiente: ${money(booking.balance)}*`,
         "",
-        "¿Nos puedes confirmar cuándo realizarás la liquidación?",
+        "¿Nos podrías confirmar cuándo realizarás la liquidación?",
+        "",
         "Si ya realizaste un pago, por favor compártenos el comprobante para revisarlo.",
-        "¡Gracias!",
+        "",
+        "¡Muchas gracias por tu atención y confianza!",
+        "*Villa Imperial*",
       ].join("\n");
   }
 }
