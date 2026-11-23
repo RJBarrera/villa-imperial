@@ -1,3 +1,4 @@
+import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
 import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import {
@@ -27,6 +28,9 @@ export default function BookingsSearch({
   onClear,
 }: BookingsSearchProps) {
   const hasFilters = Boolean(search.trim() || date);
+  const formattedDate = date
+    ? date.split("-").reverse().join("/")
+    : "Seleccionar fecha";
 
   return (
     <section className="bookings-search" aria-label="Buscar reservaciones">
@@ -60,6 +64,7 @@ export default function BookingsSearch({
             },
           }}
         />
+
         <div className="bookings-search__date-field">
           <label
             htmlFor="bookings-search-date"
@@ -68,17 +73,29 @@ export default function BookingsSearch({
             Fecha exacta
           </label>
 
-          <TextField
-            id="bookings-search-date"
-            type="date"
-            size="small"
-            value={date}
-            onChange={(event) => onDateChange(event.target.value)}
-            className="bookings-search__date"
-            fullWidth
-          />
+          <div className="bookings-search__date-control">
+            <TextField
+              id="bookings-search-date"
+              label="Fecha exacta"
+              type="date"
+              size="small"
+              value={date}
+              onChange={(event) => onDateChange(event.target.value)}
+              slotProps={{
+                inputLabel: { shrink: true },
+                htmlInput: { "aria-label": "Filtrar por fecha exacta" },
+              }}
+              className="bookings-search__date"
+            />
+
+            <div className="bookings-search__date-display" aria-hidden="true">
+              <span>{formattedDate}</span>
+              <CalendarMonthOutlined fontSize="small" />
+            </div>
+          </div>
         </div>
       </div>
+
       <div className="bookings-search__footer">
         <Typography
           component="p"
@@ -89,6 +106,7 @@ export default function BookingsSearch({
             ? `${matched} de ${total} reservaciones`
             : `${total} ${total === 1 ? "reservación" : "reservaciones"}`}
         </Typography>
+
         {hasFilters && (
           <button
             type="button"

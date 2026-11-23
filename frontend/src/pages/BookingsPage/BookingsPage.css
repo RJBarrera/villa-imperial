@@ -829,3 +829,107 @@
     font-size: 13px;
   }
 }
+
+
+/* =====================================================
+   SELECTOR DE FECHA - ESCRITORIO SIN CAMBIOS
+   ===================================================== */
+
+.bookings-search__date-field,
+.bookings-search__date-control {
+  min-width: 0;
+}
+
+.bookings-search__date-control {
+  position: relative;
+}
+
+.bookings-search__date.MuiTextField-root {
+  width: 100%;
+}
+
+.bookings-search__date-label,
+.bookings-search__date-display {
+  display: none;
+}
+
+/* =====================================================
+   SELECTOR DE FECHA - MÓVIL
+   ===================================================== */
+
+@media (max-width: 599px) {
+  .bookings-search__date-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+  }
+
+  .bookings-search__date-label {
+    display: block;
+    padding-left: 2px;
+    color: #475467;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .bookings-search__date-control {
+    position: relative;
+    width: 100%;
+  }
+
+  .bookings-search__date .MuiInputLabel-root {
+    display: none;
+  }
+
+  .bookings-search__date .MuiOutlinedInput-root {
+    position: relative;
+    min-height: 46px;
+    border-radius: 9px;
+    background: #fff;
+  }
+
+  .bookings-search__date
+    .MuiOutlinedInput-notchedOutline legend {
+    max-width: 0;
+  }
+
+  /* El selector nativo sigue funcionando */
+  .bookings-search__date input[type="date"] {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  /* Texto visible sobre el selector */
+  .bookings-search__date-display {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 14px;
+    pointer-events: none;
+    color: #344054;
+    font-size: 14px;
+  }
+
+  .bookings-search__date-display .MuiSvgIcon-root {
+    flex-shrink: 0;
+    color: #667085;
+    font-size: 19px;
+  }
+
+  .bookings-search__date-control:focus-within
+    .bookings-search__date-display {
+    color: #173b57;
+  }
+}
