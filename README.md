@@ -34,6 +34,7 @@ py -3.12 -m venv .venv
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
+.venv\Scripts\activate.bat
 ```
 
 Cuando esté activo, la consola mostrará algo similar a:
