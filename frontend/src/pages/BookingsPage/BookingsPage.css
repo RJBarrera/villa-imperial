@@ -290,6 +290,15 @@
   margin-top: 14px;
 }
 
+.bookings-search__date-label {
+  display: block;
+  padding-left: 2px;
+  color: #475467;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
 @media (max-width: 899px) {
   .booking-card__layout {
     flex-direction: column;
@@ -346,7 +355,6 @@
   }
 }
 
-
 /*
    PÁGINA: CABECERA Y FILTROS FIJOS, SOLO LISTA CON SCROLL
    Ajusta --bookings-page-offset si tu layout tiene otra altura.
@@ -376,12 +384,16 @@
   padding-bottom: 16px;
 }
 
-.bookings-scroll::-webkit-scrollbar { width: 7px; }
+.bookings-scroll::-webkit-scrollbar {
+  width: 7px;
+}
 .bookings-scroll::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 10px;
 }
-.bookings-scroll::-webkit-scrollbar-track { background: transparent; }
+.bookings-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
 .bookings-scroll:focus-visible {
   outline: 2px solid #c6a15b;
   outline-offset: -2px;
@@ -410,21 +422,29 @@
 }
 
 .bookings-search__input.MuiTextField-root,
-.bookings-search__date.MuiTextField-root { min-width: 0; }
+.bookings-search__date.MuiTextField-root {
+  min-width: 0;
+}
 
 .bookings-search__input .MuiOutlinedInput-root,
 .bookings-search__date .MuiOutlinedInput-root {
   background: #fff;
   border-radius: 9px;
-  font-size: 12.5px;
+  font-size: 14px;
 }
 
-.bookings-search__input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
-.bookings-search__date .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+.bookings-search__input
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline,
+.bookings-search__date
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
   border-color: #173b57;
 }
 
-.bookings-search__input .MuiInputAdornment-root { color: #667085; }
+.bookings-search__input .MuiInputAdornment-root {
+  color: #667085;
+}
 
 .bookings-search__footer {
   display: flex;
@@ -451,7 +471,9 @@
   cursor: pointer;
 }
 
-.bookings-search__clear:hover { text-decoration: underline; }
+.bookings-search__clear:hover {
+  text-decoration: underline;
+}
 .bookings-search__clear:focus-visible {
   outline: 2px solid #c6a15b;
   outline-offset: 3px;
@@ -475,23 +497,335 @@
 }
 
 @media (max-width: 899px) {
-  .bookings-page { --bookings-page-offset: 98px; }
+  .bookings-page {
+    --bookings-page-offset: 98px;
+  }
 }
 
 @media (max-width: 599px) {
-  .bookings-page { --bookings-page-offset: 92px; }
-  .bookings-header { margin-bottom: 12px; }
-  .bookings-search {
-    margin-bottom: 10px;
-    padding: 10px 11px 8px;
+  /* PÁGINA */
+
+  .bookings-page {
+    --bookings-page-offset: 92px;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
   }
+
+  /* HEADER */
+
+  .bookings-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .bookings-header__content {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .bookings-header__title.MuiTypography-root {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .bookings-header__subtitle.MuiTypography-root {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .bookings-header__button.MuiButton-root {
+    width: 100%;
+    min-height: 44px;
+    margin-left: 0;
+    padding: 9px 14px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  /* CONTENEDOR DEL BUSCADOR */
+
+  .bookings-search {
+    width: 100%;
+    min-width: 0;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
   .bookings-search__fields {
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  /* CAMPOS */
+
+  .bookings-search__input.MuiTextField-root,
+  .bookings-search__date.MuiTextField-root {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .bookings-search__input .MuiOutlinedInput-root,
+  .bookings-search__date .MuiOutlinedInput-root {
+    min-height: 44px;
+    background: #fff;
+    border-radius: 9px;
+  }
+
+  .bookings-search__input .MuiInputBase-input,
+  .bookings-search__date .MuiInputBase-input {
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  .bookings-search__input .MuiInputBase-input {
+    text-overflow: ellipsis;
+  }
+
+  /* FECHA: ETIQUETA FUERA DEL INPUT */
+
+  .bookings-search__date-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .bookings-search__date-label {
+    display: block;
+    padding-left: 2px;
+    color: #475467;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .bookings-search__date input[type="date"] {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    color: #344054;
+    font-size: 16px;
+  }
+
+  /* RESULTADOS DEL BUSCADOR */
+
+  .bookings-search__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 18px;
+    margin-top: 9px;
+  }
+
+  .bookings-search__count.MuiTypography-root {
+    font-size: 13px;
+  }
+
+  .bookings-search__clear {
+    font-size: 13px;
+  }
+
+  /* SCROLL SOLO DE RESERVACIONES */
+
+  .bookings-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: auto;
+    padding-right: 0;
+    padding-bottom: 12px;
+  }
+
+  .bookings-list {
     gap: 10px;
   }
-  .bookings-search__date.MuiTextField-root { width: 100%; }
-  .bookings-scroll {
-    padding-right: 3px;
-    padding-bottom: 10px;
+
+  /* TARJETAS */
+
+  .booking-card.MuiCard-root {
+    border-radius: 14px;
+  }
+
+  .booking-card__content.MuiCardContent-root,
+  .booking-card__content.MuiCardContent-root:last-child {
+    padding: 13px;
+  }
+
+  .booking-card__layout {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* INFORMACIÓN DEL EVENTO */
+
+  .booking-card__event {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .booking-card__date {
+    width: 58px;
+    min-width: 58px;
+    height: 64px;
+    border-radius: 12px;
+  }
+
+  .booking-card__date-day.MuiTypography-root {
+    font-size: 23px;
+  }
+
+  .booking-card__date-month.MuiTypography-root {
+    font-size: 9.5px;
+  }
+
+  .booking-card__details {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .booking-card__title-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .booking-card__event-title.MuiTypography-root {
+    font-size: 14px;
+  }
+
+  .bookings-status.MuiChip-root {
+    height: 22px;
+    font-size: 9px;
+  }
+
+  .booking-card__client.MuiTypography-root {
+    margin-top: 4px;
+    font-size: 12px;
+  }
+
+  /* METADATOS */
+
+  .booking-card__metadata {
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 7px;
+  }
+
+  .booking-card__metadata-item {
+    gap: 5px;
+    min-width: 0;
+  }
+
+  .booking-card__metadata-item .MuiTypography-root {
+    font-size: 10.5px;
+    line-height: 1.4;
+  }
+
+  .booking-card__reference.MuiTypography-root {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.4;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* RESUMEN FINANCIERO */
+
+  .booking-card__finance {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 11px;
+    background: #f8fafc;
+  }
+
+  .booking-card__finance-row {
+    align-items: center;
+    gap: 8px;
+  }
+
+  .booking-card__finance-label.MuiTypography-root {
+    font-size: 12px;
+  }
+
+  .booking-card__finance-value.MuiTypography-root {
+    font-size: 12px;
+  }
+
+  .booking-card__finance-value--strong.MuiTypography-root,
+  .booking-card__finance-value--pending.MuiTypography-root {
+    font-size: 13px;
+  }
+
+  .booking-card__detail-button.MuiButton-root {
+    width: 100%;
+    min-height: 40px;
+    margin-top: 12px;
+    border-radius: 9px;
+  }
+
+  /* ESTADOS VACÍOS */
+
+  .bookings-state--empty.MuiCardContent-root {
+    padding: 42px 16px;
+  }
+
+  .bookings-search-empty.MuiCardContent-root {
+    padding: 40px 16px;
+  }
+}
+
+/* =========================================================
+   MÓVILES PEQUEÑOS
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .bookings-header__title.MuiTypography-root {
+    font-size: 22px;
+  }
+
+  .bookings-search {
+    padding: 10px;
+  }
+
+  .booking-card__content.MuiCardContent-root,
+  .booking-card__content.MuiCardContent-root:last-child {
+    padding: 11px;
+  }
+
+  .booking-card__event {
+    gap: 9px;
+  }
+
+  .booking-card__date {
+    width: 52px;
+    min-width: 52px;
+    height: 58px;
+  }
+
+  .booking-card__date-day.MuiTypography-root {
+    font-size: 21px;
+  }
+
+  .booking-card__event-title.MuiTypography-root {
+    font-size: 13px;
   }
 }

@@ -60,18 +60,24 @@ export default function BookingsSearch({
             },
           }}
         />
-        <TextField
-          label="Fecha exacta"
-          type="date"
-          size="small"
-          value={date}
-          onChange={(event) => onDateChange(event.target.value)}
-          slotProps={{
-            inputLabel: { shrink: true },
-            htmlInput: { "aria-label": "Filtrar por fecha exacta" },
-          }}
-          className="bookings-search__date"
-        />
+        <div className="bookings-search__date-field">
+          <label
+            htmlFor="bookings-search-date"
+            className="bookings-search__date-label"
+          >
+            Fecha exacta
+          </label>
+
+          <TextField
+            id="bookings-search-date"
+            type="date"
+            size="small"
+            value={date}
+            onChange={(event) => onDateChange(event.target.value)}
+            className="bookings-search__date"
+            fullWidth
+          />
+        </div>
       </div>
       <div className="bookings-search__footer">
         <Typography
