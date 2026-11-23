@@ -38,6 +38,7 @@ import {
 
 import { printBookingReceipt } from "../../utils/bookingReceipt";
 import PaymentDialog from "./PaymentDialog";
+import BookingWhatsAppActions from "./BookingWhatsAppActions";
 import type { Booking, BookingStatus } from "../../types/booking";
 
 interface BookingDetailDialogProps {
@@ -410,6 +411,8 @@ export default function BookingDetailDialog({
                   </Stack>
                 )}
               </Box>
+
+              <BookingWhatsAppActions booking={booking} />
 
               {booking.notes && (
                 <Box>
